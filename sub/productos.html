@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>IdeasSoft - Nuestros Productos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/productos.css">
+</head>
+<body>
+    
+    <div id="navbar"></div>
+
+    <main>
+        <section class="products-hero">
+            <div class="container">
+                <nav class="breadcrumb">Inicio / Productos</nav>
+                <h1 style="color: white;">tecnologia que impulsa <br>tu crecimiento</h1>
+                <p>Explore nuestra gama completa de software empresarial. Compre licencias o alquile con planes flexibles.</p>
+            </div>
+        </section>
+
+        <section class="products-catalog">
+            <div class="container">
+                <div class="filter-bar">
+                    <div class="filter-group">
+                        <button class="filter-btn" data-filter="all">Todos</button>
+                        <button class="filter-btn" data-filter="gestion">Gestión Empresarial</button>
+                        <button class="filter-btn" data-filter="ventas">Ventas</button>
+                        <button class="filter-btn" data-filter="analisis">Análisis</button>
+                        <button class="filter-btn " data-filter="all">Seguridad</button>
+                        <button class="filter-btn" data-filter="gestion">Productividad</button>
+                    </div>
+                </div>
+
+                <div class="product-grid" id="product-container">
+
+                <!-- ERP -->
+                <div class="product-card" data-category="gestion">
+                    <div class="product-img-container">
+                        <img src="../assets/img/crm-preview.jpg" alt="IdeasERP Pro">
+                        <span class="badge-popular">Popular</span>
+                    </div>
+                    <div class="product-body">
+                        <span class="category-tag">Gestión Empresarial</span>
+                        <h3>IdeasERP Pro</h3>
+                        <p>ERP completo para gestión empresarial integral.</p>
+                        <div class="product-footer">
+                            <div class="price-box">
+                                <span class="currency">$</span>
+                                <span class="amount">149</span>
+                                <span class="period">/mes</span>
+                            </div>
+                            <div class="action-btns">
+                                <a href="detalle-producto.html?id=1" class="btn-view-details" style="text-decoration: none;">Ver detalles</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CRM -->
+                <div class="product-card" data-category="ventas">
+                    <div class="product-img-container">
+                        <img src="../assets/img/pos-preview.jpg" alt="IdeasCRM">
+                    </div>
+                    <div class="product-body">
+                        <span class="category-tag">Ventas</span>
+                        <h3>IdeasCRM</h3>
+                        <p>CRM potente para gestión de clientes.</p>
+                        <div class="product-footer">
+                            <div class="price-box">
+                                <span class="currency">$</span>
+                                <span class="amount">79</span>
+                                <span class="period">/mes</span>
+                            </div>
+                            <div class="action-btns">
+                            <a href="detalle-producto.html?id=2" class="btn-view-details" style="text-decoration: none;">Ver detalles</a>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- POS -->
+                <div class="product-card" data-category="ventas">
+                    <div class="product-img-container">
+                        <img src="../assets/img/security-preview.jpg" alt="IdeasPOS">
+                    </div>
+                    <div class="product-body">
+                        <span class="category-tag">Ventas</span>
+                        <h3>IdeasPOS</h3>
+                        <p>Punto de venta moderno para retail.</p>
+                        <div class="product-footer">
+                            <div class="price-box">
+                                <span class="currency">$</span>
+                                <span class="amount">49</span>
+                                <span class="period">/mes</span>
+                            </div>
+                            <div class="action-btns">
+    <a href="detalle-producto.html?id=2" class="btn-view-details" style="text-decoration: none;">Ver detalles</a>
+</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analytics -->
+                <div class="product-card" data-category="analisis">
+                    <div class="product-img-container">
+                        <img src="../assets/img/crm-preview.jpg" alt="IdeasAnalytics">
+                    </div>
+                    <div class="product-body">
+                        <span class="category-tag">Análisis</span>
+                        <h3>IdeasAnalytics</h3>
+                        <p>Dashboard avanzado con métricas en tiempo real.</p>
+                        <div class="product-footer">
+                            <div class="price-box">
+                                <span class="currency">$</span>
+                                <span class="amount">99</span>
+                                <span class="period">/mes</span>
+                            </div>
+                            <div class="action-btns">
+    <a href="detalle-producto.html?id=2" class="btn-view-details" style="text-decoration: none;">Ver detalles</a>
+</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="../js/auth.js"></script> 
+    <script src="js/car.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/detalles.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const products = document.querySelectorAll(".product-card");
+
+    filterButtons.forEach(button => {
+        button.addEventListener("click", () => {
+
+            // Quitar active anterior
+            filterButtons.forEach(btn => btn.classList.remove("active"));
+            button.classList.add("active");
+
+            const filter = button.getAttribute("data-filter");
+
+            products.forEach(product => {
+                const category = product.getAttribute("data-category");
+
+                if (filter === "all" || filter === category) {
+                    product.style.display = "block";
+                } else {
+                    product.style.display = "none";
+                }
+            });
+        });
+    });
+
+});
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

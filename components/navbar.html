@@ -1,0 +1,54 @@
+<header class="main-header">
+    <nav class="navbar-container"> 
+        <div class="logo">
+            <span class="logo-icon">&lt;/&gt;</span>
+            <span class="logo-text">IdeasSoft</span>
+        </div>
+        
+        <ul class="nav-menu">
+            <li><a href="/index.html" class="active">Inicio</a></li>
+            <li><a href="/sub/productos.html">Productos</a></li>
+            <li><a href="/sub/precio.html">Precios</a></li>
+            <li><a href="/sub/nosotros.html">Nosotros</a></li>
+            <li><a href="/sub/contacto.html">Contacto</a></li>
+        </ul>
+
+        <div class="nav-auth">
+            <div class="cart-container" 
+                 data-bs-toggle="offcanvas" 
+                 data-bs-target="#offcanvasCarrito" 
+                 aria-controls="offcanvasCarrito" 
+                 style="cursor: pointer;">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge badge rounded-pill bg-danger">0</span>
+            </div>
+
+            <div id="auth-section">
+                <a href="components/login.html" class="btn-login">
+                    <i class="far fa-user"></i> Ingresar
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCarrito" aria-labelledby="offcanvasCarritoLabel">
+  <div class="offcanvas-header border-bottom">
+    <h5 class="offcanvas-title" id="offcanvasCarritoLabel">
+        <i class="fas fa-box-open"></i> Mis productos
+    </h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body" id="carrito-body">
+    <p class="text-center text-muted mt-5">Cargando productos...</p>
+  </div>
+  <div class="offcanvas-footer p-3 border-top">
+    <div class="d-flex justify-content-between mb-3">
+        <strong>Total:</strong>
+        <span id="total-carrito" class="fw-bold">$0.00</span>
+    </div>
+    <button class="btn btn-dark w-100 py-2 fw-bold" onclick="confirmarCompra()">
+        FINALIZAR COMPRA
+    </button>
+  </div>
+</div>

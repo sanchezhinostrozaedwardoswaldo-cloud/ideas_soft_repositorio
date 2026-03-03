@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IdeasSoft - Panel Administrativo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/admin/css/admin.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>IDEAS SOFT</h2>
+                <span>Panel Admin</span>
+            </div>
+            <nav class="sidebar-menu">
+    <ul>
+        <li class="active"><a href="#"><i class="fas fa-home"></i> Inicio</a></li>
+        <li><a href="#"><i class="fas fa-box"></i> Gestión Productos</a></li>
+        <li><a href="#"><i class="fas fa-users"></i> Gestión Clientes</a></li>
+        <li><a href="#"><i class="fas fa-credit-card"></i> Gestión Pagos</a></li>
+        <li><a href="#"><i class="fas fa-key"></i> Gestión Licencias</a></li>
+        <li><a href="#"><i class="fas fa-chart-bar"></i> Reportes</a></li>
+        <li><a href="#"><i class="fas fa-headset"></i> Soporte</a></li>
+        
+        <li class="separator"></li>
+
+        <li>
+            <a href="../index.html" class="view-site-link">
+                <i class="fas fa-external-link-alt"></i> Ver Sitio Web
+            </a>
+        </li>
+
+        <li><a href="#"><i class="fas fa-cog"></i> Configuración</a></li>
+        <li><a href="javascript:void(0)" onclick="logout()" class="logout-link"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
+    </ul>
+</nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Buscar en el sistema...">
+                </div>
+                <div class="admin-profile">
+                    <span id="admin-name">Administrador</span>
+                    <img src="/assets/img/user.jpg" alt="Avatar" height="35" width="35">
+                </div>
+            </header>
+
+            <section class="content-body" id="dynamic-content">
+                <div class="welcome-banner">
+                    <h1>Bienvenido al Dashboard</h1>
+                    <p>Aquí podrás gestionar el <strong>servicio tecnologicos</strong> de Ideas Soft.</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-shopping-cart"></i>
+                        <div>
+                            <h3>Ventas Hoy</h3>
+                            <p>S/ 1,250.00</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-user-plus"></i>
+                        <div>
+                            <h3>Nuevos Clientes</h3>
+                            <p>12</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h3>Licencias Activas</h3>
+                            <p>450</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/auth.js"></script>
+</body>
+</html>

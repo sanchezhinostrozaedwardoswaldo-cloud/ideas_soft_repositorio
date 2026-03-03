@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IdeasSoft - Detalles del Producto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/detalle_producto_premium.css">
+</head>
+<body class="bg-light">
+
+<div id="navbar"></div>
+
+<main>
+    <section class="header-details bg-dark text-white">
+        <div class="container">
+            <div class="pt-4">
+                <a href="productos.html" class="back-link text-white-50 text-decoration-none small d-inline-flex align-items-center">
+                    <i class="fas fa-arrow-left me-2"></i> Volver a productos
+                </a>
+                <h1 id="det-titulo" class="display-3 fw-bold mt-3">Cargando...</h1>
+                <span id="det-categoria" class="badge rounded-pill bg-primary px-3 py-2 mt-2">Categoría</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-body bg-white py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-8">
+                    <div class="preview-container mb-5">
+                        <img id="det-img" src="../assets/img/placeholder.jpg" class="img-fluid rounded-4 shadow-sm w-100" alt="Software Preview">
+                    </div>
+
+                    <div class="demo-box d-flex justify-content-between align-items-center p-4 rounded-4 mb-5 shadow-sm">
+                        <div>
+                            <h5 class="fw-bold text-dark mb-1">¿Quieres probarlo?</h5>
+                            <p class="text-muted mb-0 small">Solicita una demostración en vivo de este software.</p>
+                        </div>
+                        <button class="btn btn-primary rounded-pill px-4 shadow-sm">
+                            <i class="fas fa-desktop me-2"></i> Solicitar Demo
+                        </button>
+                    </div>
+
+                    <div class="description-text mb-5">
+                        <h4 class="fw-bold text-dark mb-3">Descripción</h4>
+                        <p id="det-descripcion" class="text-muted lh-lg">
+                            Cargando información detallada del producto...
+                        </p>
+                    </div>
+
+                    <h4 class="fw-bold text-dark mb-3">Características</h4>
+                    <div class="row g-3" id="lista-caracteristicas">
+                        <div class="col-md-6">
+                            <div class="feature-card p-3 rounded-3 d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i> 
+                                <span class="text-dark">Seguimiento de leads</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="feature-card p-3 rounded-3 d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i> 
+                                <span class="text-dark">Reportes en tiempo real</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="sticky-top" style="top: 100px; z-index: 10;">
+                        <div class="card border-0 shadow-lg p-4 mb-4" style="border-radius: 20px;">
+                            <small class="text-muted fw-bold text-uppercase">Licencia perpetua</small>
+                            <h2 class="fw-bold text-primary display-5 mt-2">$<span id="det-precio-perpetuo">0</span></h2>
+                            <button class="btn btn-primary w-100 py-3 mt-3 fw-bold rounded-pill shadow" onclick="comprarAhora()">
+                                <i class="fas fa-shopping-cart me-2"></i> Comprar Ahora
+                            </button>
+                        </div>
+
+                        <div class="card border-0 shadow-sm p-4" style="border-radius: 20px; background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);">
+                            <small class="text-muted fw-bold text-uppercase">Suscripción mensual</small>
+                            <h2 class="fw-bold text-dark mt-2">$<span id="det-precio-mensual">0</span><small class="fs-6 text-muted">/mes</small></h2>
+                            <button class="btn btn-outline-primary w-100 py-3 mt-3 fw-bold rounded-pill">
+                                <i class="fas fa-sync me-2"></i> Suscribirse
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div id="footer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/detalles.js"></script>
+</body>
+</html>

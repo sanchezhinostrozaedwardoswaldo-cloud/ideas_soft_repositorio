@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Carrito - IdeasSoft</title>
+    <link rel="stylesheet" href="../css/estilos.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <main class="container">
+        <h2><i class="fas fa-shopping-cart"></i> Tu Carrito de Compras</h2>
+        
+        <div id="carrito-vacio" style="display: none; text-align: center; padding: 50px;">
+            <p>Aún no tienes productos en la **tecnología que impulsa tu crecimiento**.</p>
+            <a href="productos.html" class="btn-primario">Ir a la tienda</a>
+        </div>
+
+        <div id="contenido-carrito">
+            <table class="tabla-carrito">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unit.</th>
+                        <th>Subtotal</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="lista-productos">
+                    </tbody>
+            </table>
+
+            <div class="carrito-resumen">
+                <h3>Total a pagar: <span id="total-carrito">$0.00</span></h3>
+                <button onclick="confirmarCompra()" class="btn-confirmar">
+                    <i class="fas fa-check"></i> Finalizar Compra
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/car.js"></script>
+    <script>
+        // Al cargar esta página específica, llenamos la tabla
+        document.addEventListener('DOMContentLoaded', renderizarCarrito);
+    </script>
+</body>
+</html>
