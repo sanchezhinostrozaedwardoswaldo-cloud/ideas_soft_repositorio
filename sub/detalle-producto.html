@@ -76,7 +76,7 @@
                         <div class="card border-0 shadow-lg p-4 mb-4" style="border-radius: 20px;">
                             <small class="text-muted fw-bold text-uppercase">Licencia perpetua</small>
                             <h2 class="fw-bold text-primary display-5 mt-2">$<span id="det-precio-perpetuo">0</span></h2>
-                            <button class="btn btn-primary w-100 py-3 mt-3 fw-bold rounded-pill shadow" onclick="comprarAhora()">
+                            <button onclick="agregarCarrito('venta')" class="btn btn-primary">
                                 <i class="fas fa-shopping-cart me-2"></i> Comprar Ahora
                             </button>
                         </div>
@@ -84,7 +84,7 @@
                         <div class="card border-0 shadow-sm p-4" style="border-radius: 20px; background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);">
                             <small class="text-muted fw-bold text-uppercase">Suscripción mensual</small>
                             <h2 class="fw-bold text-dark mt-2">$<span id="det-precio-mensual">0</span><small class="fs-6 text-muted">/mes</small></h2>
-                            <button class="btn btn-outline-primary w-100 py-3 mt-3 fw-bold rounded-pill">
+                            <button onclick="agregarCarrito('suscripcion')" class="btn btn-outline-primary">
                                 <i class="fas fa-sync me-2"></i> Suscribirse
                             </button>
                         </div>

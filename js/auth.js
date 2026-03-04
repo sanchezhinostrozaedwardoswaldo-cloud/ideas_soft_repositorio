@@ -6,29 +6,30 @@ window.actualizarNavbar = function() {
     const email = localStorage.getItem('user_email');
     const token = localStorage.getItem('token');
 
-    if (authSection) {
-        if (token && email) {
-            // Reemplazamos el Login por el correo del usuario
-            authSection.innerHTML = `
-                <div style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1.2;">
-                    <span style="color: #365386; font-weight: bold; font-size: 0.85rem;">
-                        <i class="fas fa-user-circle"></i> ${email}
-                    </span>
-                    <a href="javascript:void(0)" onclick="logout()" 
-                       style="color: #d9534f; text-decoration: none; font-size: 0.7rem; font-weight: bold; text-transform: uppercase;">
-                        Cerrar Sesión
-                    </a>
-                </div>
-            `;
-        } else {
-            // Si no hay sesión, ruta correcta al login
-            const esRaiz = !window.location.pathname.includes('components/');
-            const rutaLogin = esRaiz ? 'components/login.html' : 'login.html';
-            authSection.innerHTML = `<a href="${rutaLogin}" style="color: #365386; font-weight: bold;">Login</a>`;
-        }
+    if (!authSection) return;
+
+    if (token && email) {
+        // Usuario logueado
+        authSection.innerHTML = `
+            <div class="user-info-nav">
+                <span class="user-email"><i class="fas fa-user-circle"></i> ${email}</span>
+                <a href="javascript:void(0)" onclick="logout()" class="btn-logout-nav">Salir</a>
+            </div>
+        `;
+    } else {
+        // Usuario NO logueado
+        // Detectamos si estamos en la raíz o en una subcarpeta para poner la ruta correcta
+        const path = window.location.pathname;
+        const isInSubfolder = path.includes('/sub/') || path.includes('/components/');
+        const loginPath = isInSubfolder ? '../components/login.html' : 'components/login.html';
+
+        authSection.innerHTML = `
+            <a href="${loginPath}" class="btn-login">
+                <i class="far fa-user"></i> Ingresar
+            </a>
+        `;
     }
 };
-
 // 2. Función GLOBAL para cerrar sesión
 window.logout = function() {
     localStorage.removeItem('token');

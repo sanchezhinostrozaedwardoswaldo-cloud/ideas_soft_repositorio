@@ -203,3 +203,94 @@
         grid-template-columns: 1fr;
     }
 }
+
+.btn-video, .btn-resena {
+    border-radius: 20px;
+    font-size: 0.8rem;
+    padding: 5px 15px;
+    transition: all 0.3s ease;
+}
+
+.btn-video:hover {
+    background-color: #2563eb;
+    color: white;
+}
+
+/* Ajuste del contenedor de imagen para que el botón no se mueva */
+.product-img-container {
+    position: relative;
+    height: 220px;
+    background: #e2e8f0; /* Fondo por si la imagen demora */
+}
+
+.btn-play-demo i {
+    font-size: 1.1rem;
+}
+
+.btn-play-demo:hover {
+    background: #2563eb;
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.4);
+}
+
+/* --- SECCIÓN VIDEO CORREGIDA --- */
+
+/* Contenedor de imagen: Asegura que el botón se centre respecto a este cuadro */
+.product-img-container {
+    position: relative;
+    height: 220px;
+    background: #000; /* Fondo negro por si falla la imagen */
+    overflow: hidden;
+}
+
+.product-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.3s ease;
+}
+
+/* Botón Play: Única definición para evitar conflictos */
+.btn-play-demo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #2563eb !important; /* Azul sólido para que resalte */
+    color: white !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    border-radius: 50px !important;
+    font-weight: 700 !important;
+    font-size: 0.85rem !important;
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    z-index: 20;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    width: auto !important; /* Evita que herede el width: 40px anterior */
+    height: auto !important; /* Evita que herede el height: 40px anterior */
+}
+
+.btn-play-demo i {
+    font-size: 1rem;
+}
+
+.btn-play-demo:hover {
+    background: #1d4ed8 !important;
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+/* Efecto visual al pasar el mouse por la tarjeta */
+.product-card:hover .product-img-container img {
+    filter: brightness(0.6);
+}
+
+/* Corrección para el contenedor del video en el modal */
+#videoContainer video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain; /* Para que el video no se deforme */
+}
