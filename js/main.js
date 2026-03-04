@@ -60,3 +60,4 @@ annualBtn.addEventListener("click", () => {
         period.textContent = "/mes (facturado anual)";
     });
 });
+
