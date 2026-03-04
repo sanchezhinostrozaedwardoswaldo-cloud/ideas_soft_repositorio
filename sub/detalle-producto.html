@@ -52,8 +52,41 @@
                             Sistema de gestión empresarial integral para optimizar tus procesos.
                         </p>
                     </div>
-                </div>
+                    <section class="container mt-5">
+    <div class="row">
+        <div class="col-md-7">
+            <h4 class="fw-bold mb-4">Opiniones de clientes</h4>
+            <div id="lista-resenas">
+                <p class="text-muted">Cargando comentarios...</p>
+            </div>
+        </div>
 
+        <div class="col-md-5">
+            <div class="card p-4 border-0 shadow-sm bg-light">
+                <h5 class="fw-bold">Deja tu opinión</h5>
+                <form id="form-resena" onsubmit="enviarResena(event)">
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Calificación</label>
+                        <select id="res-calificacion" class="form-select" required>
+                            <option value="5">⭐⭐⭐⭐⭐ (Excelente)</option>
+                            <option value="4">⭐⭐⭐⭐ (Muy bueno)</option>
+                            <option value="3">⭐⭐⭐ (Regular)</option>
+                            <option value="2">⭐⭐ (Malo)</option>
+                            <option value="1">⭐ (Muy malo)</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Comentario</label>
+                        <textarea id="res-comentario" class="form-control" rows="3" placeholder="Cuéntanos tu experiencia con el software..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Publicar reseña</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+                </div>
+                
                 <div class="col-lg-4">
                     <div class="sidebar-sticky-container">
                         <!-- Licencia Perpetua -->
