@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IdeasSoft - Panel de Cliente</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css"> <style>
+        :root { --primary-color: #0d6efd; --sidebar-width: 250px; }
+        .wrapper { display: flex; min-height: 100vh; }
+        #sidebar { width: var(--sidebar-width); background: #212529; color: white; transition: all 0.3s; }
+        #sidebar .nav-link { color: rgba(255,255,255,0.8); padding: 15px 20px; border-radius: 0; }
+        #sidebar .nav-link:hover, #sidebar .nav-link.active { background: #343a40; color: white; border-left: 4px solid var(--primary-color); }
+        #content { flex: 1; padding: 30px; background: #f8f9fa; }
+        .card-stat { border: none; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .loading-overlay { display: none; text-align: center; padding: 50px; }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <nav id="sidebar">
+        <div class="p-4">
+            <h4>IdeasSoft</h4>
+            <hr>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a href="#" class="nav-link active" onclick="cargarSeccion('licencias')">
+                    <i class="fas fa-key me-2"></i> Mis Licencias
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" onclick="cargarSeccion('ventas')">
+                    <i class="fas fa-shopping-cart me-2"></i> Mis Compras
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" onclick="cargarSeccion('pagos')">
+                    <i class="fas fa-credit-card me-2"></i> Pagos
+                </a>
+            </li>
+            <li class="nav-item mt-5">
+                <a href="javascript:void(0)" onclick="logout()" class="nav-link text-danger">
+                    <i class="fas fa-sign-out-alt me-2"></i> Salir
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <main id="content">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 id="section-title">Mis Licencias Detalle</h2>
+            <div id="user-display" class="badge bg-primary p-2"></div>
+        </div>
+
+        <div id="loading" class="loading-overlay">
+            <div class="spinner-border text-primary" role="status"></div>
+            <p class="mt-2">Cargando información...</p>
+        </div>
+
+        <div id="data-container" class="table-responsive">
+            </div>
+    </main>
+</div>
+
+<script src="../js/auth.js"></script>
+<script src="panel.js"></script>
+</body>
+</html>

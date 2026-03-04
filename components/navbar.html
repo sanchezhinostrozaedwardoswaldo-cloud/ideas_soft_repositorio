@@ -1,54 +1,90 @@
+<!-- header.html -->
 <header class="main-header">
-    <nav class="navbar-container"> 
-        <div class="logo">
-            <span class="logo-icon">&lt;/&gt;</span>
-            <span class="logo-text">IdeasSoft</span>
-        </div>
-        
-        <ul class="nav-menu">
-            <li><a href="/index.html" class="active">Inicio</a></li>
-            <li><a href="/sub/productos.html">Productos</a></li>
-            <li><a href="/sub/precio.html">Precios</a></li>
-            <li><a href="/sub/nosotros.html">Nosotros</a></li>
-            <li><a href="/sub/contacto.html">Contacto</a></li>
+  <nav class="navbar-container navbar navbar-expand-lg">
+    <div class="container-fluid p-0">
+
+      <!-- Logo -->
+      <a class="navbar-brand logo" href="/index.html">
+        <span class="logo-icon">&lt;/&gt;</span>
+        <span class="logo-text">IdeasSoft</span>
+      </a>
+
+      <!-- Botón hamburguesa (visible en móvil) -->
+      <button class="navbar-toggler" type="button" id="menuToggle" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Menú principal + auth -->
+      <div class="collapse navbar-collapse" id="navbarMain">
+        <ul class="nav-menu ms-auto mb-0">
+          <li><a href="/index.html">Inicio</a></li>
+          <li><a href="/sub/productos.html">Productos</a></li>
+          <li><a href="/sub/precio.html">Precios</a></li>
+          <li><a href="/sub/nosotros.html">Nosotros</a></li>
+          <li><a href="/sub/contacto.html">Contacto</a></li>
         </ul>
 
-        <div class="nav-auth">
-            <div class="cart-container" 
-                 data-bs-toggle="offcanvas" 
-                 data-bs-target="#offcanvasCarrito" 
-                 aria-controls="offcanvasCarrito" 
-                 style="cursor: pointer;">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cart-badge badge rounded-pill bg-danger">0</span>
-            </div>
+        <div class="nav-auth ms-lg-4">
+          <!-- Carrito -->
+          <div class="cart-container" 
+               data-bs-toggle="offcanvas" 
+               data-bs-target="#offcanvasCarrito" 
+               aria-controls="offcanvasCarrito"
+               style="cursor: pointer;">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-badge badge rounded-pill bg-danger">0</span>
+          </div>
 
-            <div id="auth-section">
-                <a href="/components/login.html" class="btn-login">
-                    <i class="far fa-user"></i> Ingresar
-                </a>
-            </div>
+          <!-- Auth -->
+          <div id="auth-section">
+            <a href="/components/login.html" class="btn-login">
+              <i class="far fa-user"></i> Ingresar
+            </a>
+          </div>
         </div>
-    </nav>
+      </div>
+    </div>
+  </nav>
 </header>
 
+<!-- Offcanvas Carrito -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCarrito" aria-labelledby="offcanvasCarritoLabel">
   <div class="offcanvas-header border-bottom">
     <h5 class="offcanvas-title" id="offcanvasCarritoLabel">
-        <i class="fas fa-box-open"></i> Mis productos
+      <i class="fas fa-box-open me-2"></i> Mis productos
     </h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
-  <div class="offcanvas-body" id="carrito-body">
-    <p class="text-center text-muted mt-5">Cargando productos...</p>
-  </div>
-  <div class="offcanvas-footer p-3 border-top">
-    <div class="d-flex justify-content-between mb-3">
-        <strong>Total:</strong>
-        <span id="total-carrito" class="fw-bold">$0.00</span>
+
+  <div class="offcanvas-body p-0" id="carrito-body">
+    <!-- Contenido dinámico inyectado por JS -->
+    <div class="text-center py-5 text-muted">
+      <i class="fas fa-shopping-cart fa-3x mb-3"></i>
+      <p>Cargando productos...</p>
     </div>
-    <button class="btn btn-dark w-100 py-2 fw-bold" onclick="confirmarCompra()">
-        FINALIZAR COMPRA
+  </div>
+
+  <div class="offcanvas-footer p-3 border-top bg-light">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <strong>Total:</strong>
+      <span id="total-carrito" class="fw-bold fs-5">$0.00</span>
+    </div>
+    <button class="btn btn-dark w-100 py-3 fw-bold" onclick="confirmarCompra()">
+      FINALIZAR COMPRA
     </button>
   </div>
 </div>
+
+<script>
+    // En tu archivo JS o <script> al final del body
+document.addEventListener('DOMContentLoaded', () => {
+    const toggler = document.querySelector('.navbar-toggler');
+    const menu = document.querySelector('.nav-menu');
+
+    if (toggler && menu) {
+        toggler.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+    }
+});
+</script>

@@ -1,78 +1,71 @@
-/* Configuración General */
+/* Prevenir desbordamiento horizontal */
 body {
-    margin: 0;
-    padding: 0;
-    background-color: #ffffff;
+    overflow-x: hidden;
 }
 
-/* Sección Oscura Superior */
+/* --- CABECERA --- */
 .header-details {
-    background-color: #0f172a !important; /* Azul oscuro premium */
-    padding-top: 100px !important; /* Espacio para el navbar fijo */
-    padding-bottom: 60px !important;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.85)), url('../assets/img/bg-header.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 80px 0 60px; /* Más padding arriba para dar aire al nav */
 }
 
-.back-link {
-    transition: all 0.3s ease;
+/* --- BARRA LATERAL ESTÁTICA --- */
+.sidebar-sticky-container {
+    position: sticky;
+    top: 100px;
+    z-index: 5;
+    /* Esto es clave: evita que la tarjeta ignore el ancho de la columna */
+    max-width: 100%; 
 }
 
-.back-link:hover {
-    color: #ffffff !important;
-    transform: translateX(-5px);
+/* --- TARJETAS --- */
+.card-buy-premium {
+    border-radius: 20px !important;
+    border: 1px solid rgba(0,0,0,0.05) !important; /* Añadimos borde casi invisible para dar estructura */
+    position: relative;
 }
 
-/* Sección Blanca de Contenido */
-.content-body {
-    background-color: #ffffff !important;
+.badge-mejor-valor {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background: #ffc107;
+    color: #212529;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 10;
 }
 
-/* Caja de Demo Estilo Glassmorphism Suave */
-.demo-box {
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
+/* Botón de carrito circular */
+.btn-cart-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
-/* Tarjetas de Características */
-.feature-card {
-    background-color: #f8fafc;
-    border: 1px solid #f1f5f9;
-    transition: transform 0.3s;
+.bg-light-soft {
+    background-color: #f8fbff;
+    border: 1px solid #e9ecef !important;
+    border-radius: 20px !important;
 }
 
-.feature-card:hover {
-    transform: translateY(-3px);
-    background-color: #eff6ff;
-}
+/* --- UTILIDADES --- */
+.text-black { color: #000000 !important; }
+.text-white { color: #ffffff !important; font-size: 0.85rem; letter-spacing: 0.5px; }
 
-/* Tarjetas de Precio */
-.card {
-    transition: box-shadow 0.3s ease;
-}
-
-.card:hover {
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
-}
-
-/* Botones Redondeados */
-.btn-primary {
-    background-color: #0d6efd !important;
-    border: none !important;
-}
-
-.btn-outline-primary {
-    border: 2px solid #0d6efd !important;
-    color: #0d6efd !important;
-}
-
-.btn-outline-primary:hover {
-    background-color: #0d6efd !important;
-    color: #ffffff !important;
-}
-
-/* Responsividad */
+/* Responsive: Desactiva el sticky en móviles para que no flote sobre el texto */
 @media (max-width: 991px) {
-    .sticky-top {
-        position: relative !important;
-        top: 0 !important;
+    .sidebar-sticky-container {
+        position: static;
+        margin-top: 2rem;
     }
 }

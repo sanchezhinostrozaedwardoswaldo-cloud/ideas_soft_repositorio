@@ -2,46 +2,163 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Carrito - IdeasSoft</title>
-    <link rel="stylesheet" href="../css/estilos.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/detalle_producto_premium.css">
 </head>
-<body>
-    <main class="container">
-        <h2><i class="fas fa-shopping-cart"></i> Tu Carrito de Compras</h2>
-        
-        <div id="carrito-vacio" style="display: none; text-align: center; padding: 50px;">
-            <p>Aún no tienes productos en la **tecnología que impulsa tu crecimiento**.</p>
-            <a href="productos.html" class="btn-primario">Ir a la tienda</a>
-        </div>
+<body class="bg-light">
 
-        <div id="contenido-carrito">
-            <table class="tabla-carrito">
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                        <th>Precio Unit.</th>
-                        <th>Subtotal</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-                <tbody id="lista-productos">
-                    </tbody>
-            </table>
+    <div id="navbar"></div>
 
-            <div class="carrito-resumen">
-                <h3>Total a pagar: <span id="total-carrito">$0.00</span></h3>
-                <button onclick="confirmarCompra()" class="btn-confirmar">
-                    <i class="fas fa-check"></i> Finalizar Compra
-                </button>
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card border-0 shadow-sm p-4">
+                    <h2 class="fw-bold mb-4"><i class="fas fa-shopping-cart text-primary me-2"></i> Tu Carrito de Compras</h2>
+                    
+                    <div id="carrito-vacio" style="display: none;" class="text-center py-5">
+                        <i class="fas fa-box-open fa-4x text-muted mb-3"></i>
+                        <p class="fs-5 text-muted">Aún no tienes productos en la tecnología que impulsa tu crecimiento.</p>
+                        <a href="productos.html" class="btn btn-primary rounded-pill px-4 mt-3">Explorar Software</a>
+                    </div>
+
+                    <div id="contenido-carrito">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th class="text-center">Tipo</th>
+                                        <th class="text-center">Cantidad</th>
+                                        <th class="text-end">Precio Unit.</th>
+                                        <th class="text-end">Subtotal</th>
+                                        <th class="text-center">Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="lista-productos">
+                                    </tbody>
+                            </table>
+                        </div>
+
+                        <div class="row align-items-center mt-4 pt-3 border-top">
+                            <div class="col-md-6">
+                                <p class="mb-0 fw-bold text-dark">servicio tecnologicos</p>
+                                <div class="bg-dark p-2 rounded d-inline-block mt-1">
+                                    <small class="text-white">tecnologia que impulsa tu crecimiento</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-md-end">
+                                <h3 class="fw-bold mb-3">Total: <span id="total-carrito" class="text-primary">$0.00</span></h3>
+                                <div class="d-flex gap-2 justify-content-md-end">
+                                    <a href="productos.html" class="btn btn-outline-secondary rounded-pill">Seguir Comprando</a>
+                                    <button onclick="confirmarCompra()" class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm">
+                                        <i class="fas fa-check-circle me-2"></i> Finalizar Compra
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
-    <script src="../js/car.js"></script>
+    <div id="footer"></div>
+
+    <script src="../js/main.js"></script> <script src="../js/car.js"></script>
     <script>
-        // Al cargar esta página específica, llenamos la tabla
-        document.addEventListener('DOMContentLoaded', renderizarCarrito);
+        // Al cargar la página, ejecutar renderizado
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof renderizarCarrito === 'function') {
+                renderizarCarrito();
+            }
+        });
+    </script>
+    <script>
+        // 5. RENDERIZAR EN LA TABLA DE CARRITO.HTML
+async function renderizarCarrito() {
+    const lista = document.getElementById('lista-productos');
+    const contenedorVacio = document.getElementById('carrito-vacio');
+    const contenidoCarrito = document.getElementById('contenido-carrito');
+    const totalEtiq = document.getElementById('total-carrito');
+
+    if (!lista) return; // Si no estamos en carrito.html, no hace nada
+
+    const productos = await obtenerCarrito();
+
+    if (!productos || productos.length === 0) {
+        contenedorVacio.style.display = 'block';
+        contenidoCarrito.style.display = 'none';
+        return;
+    }
+
+    contenedorVacio.style.display = 'none';
+    contenidoCarrito.style.display = 'block';
+
+    let html = '';
+    let totalGeneral = 0;
+
+    productos.forEach(item => {
+        const subtotal = item.precio * item.cantidad;
+        totalGeneral += subtotal;
+        
+        html += `
+            <tr>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <img src="${item.imagen_url || '../assets/img/hero-erp.jpg'}" class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                        <div>
+                            <h6 class="mb-0 fw-bold">${item.nombre_software}</h6>
+                            <small class="text-muted">ID: ${item.id_software}</small>
+                        </div>
+                    </div>
+                </td>
+                <td class="text-center"><span class="badge bg-light text-dark border">${item.tipo_operacion}</span></td>
+                <td class="text-center">${item.cantidad}</td>
+                <td class="text-end">$${item.precio.toFixed(2)}</td>
+                <td class="text-end fw-bold">$${subtotal.toFixed(2)}</td>
+                <td class="text-center">
+                    <button class="btn btn-outline-danger btn-sm" onclick="eliminarYRefrescarPagina(${item.id_detalle})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        `;
+    });
+
+    lista.innerHTML = html;
+    totalEtiq.innerText = `$${totalGeneral.toFixed(2)}`;
+}
+
+// Función específica para la página completa que refresca la vista
+async function eliminarYRefrescarPagina(idDetalle) {
+    if(confirm("¿Estás seguro de eliminar este software?")) {
+        await eliminarYRefrescar(idDetalle);
+        renderizarCarrito(); // Recargamos la tabla
+    }
+}
+
+// 6. CONFIRMAR COMPRA (POST /carrito/confirmar)
+async function confirmarCompra() {
+    const token = localStorage.getItem('token');
+    try {
+        const response = await fetch(`${API_URL}/confirmar`, {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        if (response.ok) {
+            alert("¡Compra confirmada con éxito! Revisa tus licencias en el Dashboard.");
+            window.location.href = "productos.html";
+        } else {
+            alert("Hubo un problema al procesar el pago.");
+        }
+    } catch (error) {
+        console.error("Error al confirmar:", error);
+    }
+}
     </script>
 </body>
 </html>

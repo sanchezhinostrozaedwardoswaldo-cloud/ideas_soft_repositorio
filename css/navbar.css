@@ -1,6 +1,7 @@
 /* ================================================================
-   HEADER EXISTENTE (MANTENIDO)
+   HEADER (MANTENIDO + RESPONSIVE + INTEGRACIÓN CARRITO)
    ================================================================ */
+
 .main-header {
     background-color: #0b1120;
     position: fixed;
@@ -45,6 +46,7 @@
     font-weight: 700;
 }
 
+/* Menú desktop */
 .nav-menu {
     display: flex;
     list-style: none;
@@ -61,7 +63,8 @@
     transition: 0.3s;
 }
 
-.nav-menu a.active, .nav-menu a:hover {
+.nav-menu a.active,
+.nav-menu a:hover {
     color: #007bff;
 }
 
@@ -73,19 +76,21 @@
 }
 
 /* ================================================================
-   INTEGRACIÓN CARRITO (ESTILO BOOTSTRAP PERSONALIZADO)
+   CARRITO - BADGE Y CONTENEDOR
    ================================================================ */
 
 .cart-container {
     color: white;
     position: relative;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     cursor: pointer;
-    display: flex;
-    align-items: center;
+    transition: color 0.3s;
 }
 
-/* Badge corregido para Bootstrap y tu estilo */
+.cart-container:hover {
+    color: #007bff;
+}
+
 .cart-badge {
     background: #007bff;
     color: white;
@@ -96,39 +101,93 @@
     top: -10px;
     right: -12px;
     font-weight: bold;
-    border: 2px solid #0b1120; /* Borde del mismo color que el header */
-}
-
-/* Personalización del Panel Lateral (Offcanvas) */
-.offcanvas {
-    background-color: #ffffff;
-    color: #1a202c; /* Color de texto oscuro para el interior */
-}
-
-.offcanvas-header {
-    background-color: #f8fafc;
-    border-bottom: 1px solid #e2e8f0;
-}
-
-/* Botón de acción principal negro (Servicio Tecnológico) */
-.btn-dark-custom {
-    background-color: #000000;
-    color: #ffffff;
-    border: none;
-    padding: 12px;
-    width: 100%;
-    font-weight: 600;
-    border-radius: 8px;
-    transition: 0.3s;
-}
-
-.btn-dark-custom:hover {
-    background-color: #2d3748;
-    color: white;
+    border: 2px solid #0b1120;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* ================================================================
-   SECCIÓN DE AUTENTICACIÓN
+   OFFCANVAS CARRITO (integrado con tu estilo oscuro del header)
+   ================================================================ */
+
+#offcanvasCarrito {
+    width: 380px !important;
+    max-width: 90vw;
+    background-color: #ffffff;
+    color: #1a202c;
+    border: none;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.4);
+    border-radius: 0 0 0 16px;
+    overflow: hidden;
+}
+
+/* Ajuste posición para no tapar el header fijo */
+.offcanvas.offcanvas-end {
+    top: 80px !important;     /* debajo del header fijo */
+    height: calc(100vh - 80px) !important;
+}
+
+/* Fondo sutil del backdrop */
+.offcanvas-backdrop.show {
+    opacity: 0.15;
+    background-color: #000;
+}
+
+/* Header del offcanvas */
+.offcanvas-header {
+    background-color: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 1.25rem 1.5rem;
+}
+
+/* Título */
+.offcanvas-title {
+    color: #1a202c;
+    font-weight: 600;
+}
+
+/* Items del carrito */
+.list-group-item {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 1rem 1.5rem;
+    transition: background 0.2s;
+}
+
+.list-group-item:hover {
+    background-color: #f8fafc;
+}
+
+/* Footer del carrito */
+.offcanvas-footer {
+    padding: 1.25rem 1.5rem;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+}
+
+/* Botón Finalizar compra - manteniendo tu estilo negro */
+.btn-finalizar {
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 14px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.btn-finalizar:hover {
+    background-color: #1a1a1a;
+}
+
+/* ================================================================
+   AUTENTICACIÓN
    ================================================================ */
 
 #auth-section {
@@ -137,68 +196,79 @@
     min-width: 140px;
 }
 
-#auth-section span {
-    color: white;
-    margin-right: 12px;
-    font-size: 0.85rem;
-}
-
 .btn-login {
     display: flex;
     align-items: center;
     gap: 8px;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 8px 15px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 8px 16px;
     border-radius: 8px;
-    text-decoration: none;
     color: white;
     font-size: 0.9rem;
     font-weight: 600;
-    transition: 0.3s;
+    text-decoration: none;
+    transition: all 0.3s;
 }
 
 .btn-login:hover {
-    background-color: rgba(255,255,255,0.2);
-    border-color: white;
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.3);
+    color: #e2e8f0;
 }
+
 /* ================================================================
-   CSS PARA EL CARRITO
+   RESPONSIVE - Menú hamburguesa en móvil
    ================================================================ */
-/* Transformación del Offcanvas a Tarjeta Evolutiva */
-#offcanvasCarrito {
-    height: auto !important;     /* Se ajusta al contenido */
-    max-height: 70vh;            /* Límite para no tapar toda la pantalla */
-    width: 350px !important;     /* Ancho compacto */
-    top: 90px;                   /* Empieza justo debajo de tu header */
-    right: 20px;                 /* Separado del borde derecho */
-    border-radius: 15px;         /* Bordes redondeados modernos */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Sombra profunda para dar profundidad */
-    border: 1px solid rgba(255,255,255,0.1);
-    background-color: #ffffff;
-    transition: all 0.3s ease-in-out;
+
+@media (max-width: 992px) {
+    .navbar-container {
+        padding: 0 5%;
+    }
+
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #0b1120;
+        padding: 20px 5%;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-menu a {
+        padding: 12px 0;
+        font-size: 1.05rem;
+    }
+
+    .nav-auth {
+        gap: 15px;
+    }
+
+    #offcanvasCarrito {
+        width: 90% !important;
+        max-width: 380px;
+    }
 }
 
-/* Ajuste para el fondo (backdrop) */
-.offcanvas-backdrop.show {
-    opacity: 0.1; /* Fondo muy sutil para no perder la vista de la web */
-}
+@media (max-width: 576px) {
+    .logo-text {
+        font-size: 1.1rem;
+    }
 
-/* Personalización de los items dentro del carrito */
-.list-group-item {
-    transition: background 0.2s;
-}
+    .cart-container {
+        font-size: 1.1rem;
+    }
 
-.list-group-item:hover {
-    background-color: #f8fafc;
-}
-
-/* Botón de Finalizar Compra con tu estilo */
-.btn-finalizar {
-    background-color: #000000; /* 'servicio tecnologicos' en negro */
-    color: #ffffff;            /* 'tecnologia que impulsa tu crecimiento' en blanco */
-    border: none;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    .btn-login {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
 }
