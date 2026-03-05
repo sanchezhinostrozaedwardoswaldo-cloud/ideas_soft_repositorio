@@ -1,274 +1,199 @@
 /* ================================================================
-   HEADER (MANTENIDO + RESPONSIVE + INTEGRACIÓN CARRITO)
+   1. VARIABLES Y BASE
    ================================================================ */
+:root {
+  --header-height: 70px;
+  --header-bg: #0b1120;
+  --header-border: rgba(255, 255, 255, 0.1);
+  --blue: #007bff;
+  --white: #ffffff;
+  --btn-bg: rgba(255, 255, 255, 0.08); 
+  --btn-hover: rgba(255, 255, 255, 0.15);
+  --nav-link: #a0aec0;
+}
+
+/* Forzar el fondo oscuro para evitar destellos blancos de Bootstrap */
+header.main-header, 
+.main-header .navbar-container {
+  background-color: var(--header-bg) !important;
+}
 
 .main-header {
-    background-color: #0b1120;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding: 15px 0;
+  position: fixed;
+  width: 100%;
+  top: 0; left: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--header-border);
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
 }
 
+/* ESTRUCTURA GRID: Logo | Menú | Acciones */
 .navbar-container {
-    max-width: 1300px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 4%;
-    width: 100%;
-    box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 220px 1fr 220px;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
+/* ================================================================
+   2. ELEMENTOS ESTÁTICOS (LOGO Y MENÚ)
+   ================================================================ */
 .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: max-content;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  justify-self: start;
 }
 
 .logo-icon {
-    background-color: #007bff;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 6px;
-    font-weight: bold;
-    font-family: monospace;
+  background-color: var(--blue);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-weight: bold;
 }
 
-.logo-text {
-    color: white;
-    font-size: 1.3rem;
-    font-weight: 700;
-}
+.logo-text { color: white; font-weight: 700; font-size: 1.25rem; }
 
-/* Menú desktop */
 .nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 30px;
-    margin: 0;
-    padding: 0;
+  display: flex; /* Visible en PC */
+  list-style: none;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
 }
 
 .nav-menu a {
-    text-decoration: none;
-    color: #a0aec0;
-    font-size: 0.95rem;
-    font-weight: 500;
-    transition: 0.3s;
+  text-decoration: none;
+  color: var(--nav-link);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: 0.3s;
 }
 
-.nav-menu a.active,
-.nav-menu a:hover {
-    color: #007bff;
-}
-
-.nav-auth {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-    min-width: max-content;
-}
+.nav-menu a:hover, .nav-menu a.active { color: var(--blue); }
 
 /* ================================================================
-   CARRITO - BADGE Y CONTENEDOR
+   3. BOTONES DE ACCIÓN (LOS "CUADRITOS")
    ================================================================ */
-
-.cart-container {
-    color: white;
-    position: relative;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: color 0.3s;
+.nav-auth {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-self: end;
 }
 
-.cart-container:hover {
-    color: #007bff;
+/* UNIFICACIÓN: Estilo para botón de login, botón de usuario JS y hamburguesa */
+.btn-login, 
+.nav-icon-btn,
+.hamburger-btn {
+  background-color: var(--btn-bg) !important;
+  border: 1px solid var(--header-border) !important;
+  color: white !important;
+  border-radius: 8px !important;
+  height: 40px;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: none !important;
+}
+
+/* --- SOLUCIÓN AL PROBLEMA: Hamburguesa OCULTA en PC --- */
+.hamburger-btn {
+  display: none !important; /* Desaparece en PC/Laptop */
+  width: 40px;
+  padding: 0 !important;
+}
+
+.btn-login, .nav-icon-btn {
+  padding: 0 15px !important;
+}
+
+.btn-login:hover, .nav-icon-btn:hover, .hamburger-btn:hover {
+  background-color: var(--btn-hover) !important;
+}
+
+/* Email Truncado (Para que no empuje el diseño) */
+.user-email-text, .btn-text {
+  font-size: 0.85rem;
+  max-width: 130px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: 8px;
+}
+
+/* Carrito */
+.cart-container {
+  color: white;
+  position: relative;
+  font-size: 1.2rem;
+  margin-right: 5px;
+  cursor: pointer;
 }
 
 .cart-badge {
-    background: #007bff;
-    color: white;
-    font-size: 10px;
-    padding: 2px 6px;
-    border-radius: 50%;
+  background: var(--blue);
+  font-size: 0.65rem;
+  position: absolute;
+  top: -8px; right: -10px;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Dropdown del Usuario (Fondo oscuro) */
+.dropdown-menu {
+  background-color: #161d31 !important;
+  border: 1px solid var(--header-border) !important;
+}
+
+.dropdown-item { color: var(--nav-link) !important; }
+.dropdown-item:hover { background-color: rgba(255,255,255,0.05) !important; color: white !important; }
+
+/* ================================================================
+   4. RESPONSIVE (MÓVIL Y TABLET)
+   ================================================================ */
+@media (max-width: 991px) {
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Ocultamos menú horizontal */
+  .nav-menu {
+    display: none; 
+    flex-direction: column;
     position: absolute;
-    top: -10px;
-    right: -12px;
-    font-weight: bold;
-    border: 2px solid #0b1120;
-    min-width: 18px;
-    height: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    top: var(--header-height);
+    left: 0; width: 100%;
+    background: #0f172a;
+    padding: 20px;
+    border-bottom: 1px solid var(--header-border);
+  }
+
+  /* --- ACTIVAMOS Hamburguesa en móvil --- */
+  .hamburger-btn {
+    display: flex !important;
+  }
+
+  .nav-menu.active { display: flex; }
+
+  /* En móvil el botón de usuario se vuelve solo icono cuadrado */
+  .btn-text, .user-email-text { display: none; }
+  .btn-login, .nav-icon-btn { width: 40px; padding: 0 !important; }
 }
 
-/* ================================================================
-   OFFCANVAS CARRITO (integrado con tu estilo oscuro del header)
-   ================================================================ */
-
-#offcanvasCarrito {
-    width: 380px !important;
-    max-width: 90vw;
-    background-color: #ffffff;
-    color: #1a202c;
-    border: none;
-    box-shadow: -10px 0 30px rgba(0,0,0,0.4);
-    border-radius: 0 0 0 16px;
-    overflow: hidden;
-}
-
-/* Ajuste posición para no tapar el header fijo */
-.offcanvas.offcanvas-end {
-    top: 80px !important;     /* debajo del header fijo */
-    height: calc(100vh - 80px) !important;
-}
-
-/* Fondo sutil del backdrop */
-.offcanvas-backdrop.show {
-    opacity: 0.15;
-    background-color: #000;
-}
-
-/* Header del offcanvas */
-.offcanvas-header {
-    background-color: #f8fafc;
-    border-bottom: 1px solid #e2e8f0;
-    padding: 1.25rem 1.5rem;
-}
-
-/* Título */
-.offcanvas-title {
-    color: #1a202c;
-    font-weight: 600;
-}
-
-/* Items del carrito */
-.list-group-item {
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid #e2e8f0;
-    padding: 1rem 1.5rem;
-    transition: background 0.2s;
-}
-
-.list-group-item:hover {
-    background-color: #f8fafc;
-}
-
-/* Footer del carrito */
-.offcanvas-footer {
-    padding: 1.25rem 1.5rem;
-    background: #f8fafc;
-    border-top: 1px solid #e2e8f0;
-}
-
-/* Botón Finalizar compra - manteniendo tu estilo negro */
-.btn-finalizar {
-    background-color: #000000;
-    color: #ffffff;
-    border: none;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 14px;
-    border-radius: 8px;
-    transition: background-color 0.3s;
-}
-
-.btn-finalizar:hover {
-    background-color: #1a1a1a;
-}
-
-/* ================================================================
-   AUTENTICACIÓN
-   ================================================================ */
-
-#auth-section {
-    display: flex;
-    align-items: center;
-    min-width: 140px;
-}
-
-.btn-login {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    padding: 8px 16px;
-    border-radius: 8px;
-    color: white;
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s;
-}
-
-.btn-login:hover {
-    background: rgba(255,255,255,0.15);
-    border-color: rgba(255,255,255,0.3);
-    color: #e2e8f0;
-}
-
-/* ================================================================
-   RESPONSIVE - Menú hamburguesa en móvil
-   ================================================================ */
-
-@media (max-width: 992px) {
-    .navbar-container {
-        padding: 0 5%;
-    }
-
-    .nav-menu {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: #0b1120;
-        padding: 20px 5%;
-        border-top: 1px solid rgba(255,255,255,0.1);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-    }
-
-    .nav-menu.active {
-        display: flex;
-    }
-
-    .nav-menu a {
-        padding: 12px 0;
-        font-size: 1.05rem;
-    }
-
-    .nav-auth {
-        gap: 15px;
-    }
-
-    #offcanvasCarrito {
-        width: 90% !important;
-        max-width: 380px;
-    }
-}
-
-@media (max-width: 576px) {
-    .logo-text {
-        font-size: 1.1rem;
-    }
-
-    .cart-container {
-        font-size: 1.1rem;
-    }
-
-    .btn-login {
-        padding: 6px 12px;
-        font-size: 0.85rem;
-    }
-}
+/* REGLAS DE TEXTO PERSONALIZADAS */
+.tagline { color: var(--white) !important; } /* tecnología que impulsa tu crecimiento */
+.services-highlight { color: #000000 !important; font-weight: bold; } /* servicio tecnologicos */

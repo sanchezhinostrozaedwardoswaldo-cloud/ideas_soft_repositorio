@@ -9,16 +9,36 @@ window.actualizarNavbar = function() {
     if (!authSection) return;
 
     if (token && email) {
-        // Usuario logueado
-        authSection.innerHTML = `
-            <div class="user-info-nav">
-                <span class="user-email"><i class="fas fa-user-circle"></i> ${email}</span>
-                <a href="javascript:void(0)" onclick="logout()" class="btn-logout-nav">Salir</a>
-            </div>
-        `;
+        // Estructura de Dropdown de Bootstrap 5
+        // Busca esta parte en tu auth.js y reemplaza el innerHTML del if  s(token && email)
+           if (token && email) {
+   // Dentro de window.actualizarNavbar, en la parte de (token && email)
+authSection.innerHTML = `
+    <div class="dropdown">
+        <button class="nav-icon-btn dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user-circle"></i>
+            <span class="user-email-text">${email}</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
+            <li><a class="dropdown-item" href="/sub/panel.html"><i class="fas fa-th-large me-2"></i> Mi Panel</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="javascript:void(0)" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i> Salir</a></li>
+        </ul>
+    </div>
+`;
+    // Inicialización de Bootstrap (mantén la que ya pusimos)
+    const dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+    dropdownElementList.map(dropdownToggleEl => new bootstrap.Dropdown(dropdownToggleEl));
+}
+        // --- AÑADIDO: Inicialización manual para Dropdowns inyectados ---
+        const dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+        dropdownElementList.map(function (dropdownToggleEl) {
+            return new bootstrap.Dropdown(dropdownToggleEl);
+        });
+        // ---------------------------------------------------------------
+
     } else {
-        // Usuario NO logueado
-        // Detectamos si estamos en la raíz o en una subcarpeta para poner la ruta correcta
+        // Usuario NO logueado (Mantener tu lógica de rutas)
         const path = window.location.pathname;
         const isInSubfolder = path.includes('/sub/') || path.includes('/components/');
         const loginPath = isInSubfolder ? '../components/login.html' : 'components/login.html';
@@ -30,6 +50,7 @@ window.actualizarNavbar = function() {
         `;
     }
 };
+
 // 2. Función GLOBAL para cerrar sesión
 window.logout = function() {
     localStorage.removeItem('token');
@@ -63,17 +84,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const result = await response.json();
 
-                // VALIDACIÓN CRÍTICA: 
-                // Debe ser response.ok (200-299) 
-                // Y NO debe traer un campo "error" 
-                // Y DEBE traer el "access_token"
                 if (response.ok && !result.error && result.access_token) {
                     localStorage.setItem('token', result.access_token);
                     localStorage.setItem('user_email', email);
                     alert("✅ Bienvenido");
                     window.location.href = "../index.html"; 
                 } else {
-                    // Si el backend mandó {"error": "..."} o no hay token, mostramos el error real
                     const mensaje = result.detail || result.error || "Credenciales incorrectas. Intente de nuevo.";
                     alert("❌ " + mensaje);
                 }
@@ -86,18 +102,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Lógica de REGISTRO
+
     if (registroForm) {
         registroForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const btn = registroForm.querySelector('button');
-            // Aquí iría tu lógica de registro (asegúrate de que coincida con tus campos de HTML)
-            // ...
+            // Tu lógica de registro...
         });
     }
 
-    
-    // Ejecutar actualización de navbar al cargar la página
-    actualizarNavbar();
 
+
+    actualizarNavbar();
+    
 });

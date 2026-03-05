@@ -3,69 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IdeasSoft - Panel de Cliente</title>
+    <title>IdeasSoft - Mi Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/main.css"> <style>
-        :root { --primary-color: #0d6efd; --sidebar-width: 250px; }
-        .wrapper { display: flex; min-height: 100vh; }
-        #sidebar { width: var(--sidebar-width); background: #212529; color: white; transition: all 0.3s; }
-        #sidebar .nav-link { color: rgba(255,255,255,0.8); padding: 15px 20px; border-radius: 0; }
-        #sidebar .nav-link:hover, #sidebar .nav-link.active { background: #343a40; color: white; border-left: 4px solid var(--primary-color); }
-        #content { flex: 1; padding: 30px; background: #f8f9fa; }
-        .card-stat { border: none; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .loading-overlay { display: none; text-align: center; padding: 50px; }
-    </style>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/panel.css">
 </head>
 <body>
+      <div id="navbar"></div>
 
-<div class="wrapper">
-    <nav id="sidebar">
-        <div class="p-4">
-            <h4>IdeasSoft</h4>
-            <hr>
-        </div>
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a href="#" class="nav-link active" onclick="cargarSeccion('licencias')">
-                    <i class="fas fa-key me-2"></i> Mis Licencias
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link" onclick="cargarSeccion('ventas')">
-                    <i class="fas fa-shopping-cart me-2"></i> Mis Compras
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link" onclick="cargarSeccion('pagos')">
-                    <i class="fas fa-credit-card me-2"></i> Pagos
-                </a>
-            </li>
-            <li class="nav-item mt-5">
-                <a href="javascript:void(0)" onclick="logout()" class="nav-link text-danger">
-                    <i class="fas fa-sign-out-alt me-2"></i> Salir
-                </a>
-            </li>
-        </ul>
-    </nav>
 
-    <main id="content">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 id="section-title">Mis Licencias Detalle</h2>
-            <div id="user-display" class="badge bg-primary p-2"></div>
-        </div>
-
-        <div id="loading" class="loading-overlay">
-            <div class="spinner-border text-primary" role="status"></div>
-            <p class="mt-2">Cargando información...</p>
-        </div>
-
-        <div id="data-container" class="table-responsive">
+   <main>
+    <br>
+    <div class="main-wrapper bg-light">
+        <div class="panel-hero py-5 bg-dark text-white text-center">
+            <div class="container py-4">
+                <h1 class="display-5 fw-bold mb-2">Mi Centro de Gestión</h1>
+                <p class="lead opacity-75 mb-0">
+                    Bienvenido de nuevo, <span id="user-display-email" class="text-primary fw-bold">senati@gmail.com</span>
+                </p>
             </div>
-    </main>
-</div>
+        </div>
 
+        <div class="container py-5 mt-5 mt-n4"> 
+            <div class="row justify-content-center">
+                <div class="col-lg-10"> <div class="nav-container mb-4">
+                        <ul class="nav nav-tabs nav-justified border-0 shadow rounded-4 bg-white overflow-hidden" id="panelNav">
+                            <li class="nav-item">
+                                <button class="nav-link active py-3" onclick="cargarSeccion('licencias', event)">
+                                    <i class="fas fa-key me-2 text-primary"></i> Mis Licencias
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link py-3" onclick="cargarSeccion('ventas', event)">
+                                    <i class="fas fa-shopping-bag me-2 text-primary"></i> Compras
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link py-3" onclick="cargarSeccion('pagos', event)">
+                                    <i class="fas fa-receipt me-2 text-primary"></i> Pagos
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link py-3" onclick="cargarSeccion('configuracion', event)">
+                                    <i class="fas fa-user-gear me-2 text-primary"></i> Configuración
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card border-0 shadow-sm rounded-4 bg-white">
+                        <div class="card-header bg-white p-4 border-bottom d-flex justify-content-between align-items-center">
+                            <h4 class="mb-0 fw-bold" id="section-title">Detalles de Licencias</h4>
+                            <div id="loading-spinner" class="spinner-grow text-primary spinner-grow-sm" role="status" style="display:none;"></div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div id="data-container" class="table-responsive p-4">
+                                <div class="text-center py-5 text-muted">
+                                    <i class="fas fa-circle-notch fa-spin fa-2x mb-2 text-primary"></i>
+                                    <p>Cargando información segura...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+  <div id="footer"></div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../js/auth.js"></script>
-<script src="panel.js"></script>
+<script src="../js/navbar.js"></script> <script src="panel.js"></script>
+   <script>
+    async function cargarComponentes() {
+        try {
+            // 1. Cargar Navbar y Footer en paralelo
+            const [nav, foot] = await Promise.all([
+                fetch('../components/navbar.html').then(r => r.text()),
+                fetch('../components/footer.html').then(r => r.text())
+            ]);
+            
+            // 2. Inyectar en el DOM
+            document.getElementById('navbar').innerHTML = nav;
+            document.getElementById('footer').innerHTML = foot;
+
+            // 3. Ejecutar Lógica de Usuario (Email en navbar)
+            if(window.actualizarNavbar) window.actualizarNavbar();
+
+            // 4. INICIALIZAR HAMBURGUESA (navbar.js)
+            // Esto es lo que activa el menú móvil
+            if(window.initHeader) {
+                window.initHeader();
+            } else {
+                console.warn("No se encontró la función initHeader en navbar.js");
+            }
+
+            // 5. Mostrar email del usuario en el Panel Hero
+            const userEmail = localStorage.getItem('user_email');
+            if(userEmail) {
+                document.getElementById('user-display-email').innerText = userEmail;
+            }
+
+        } catch (e) { 
+            console.error("Error cargando componentes del panel:", e); 
+        }
+    }
+    document.addEventListener('DOMContentLoaded', cargarComponentes);
+</script>
 </body>
 </html>

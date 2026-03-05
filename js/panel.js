@@ -1,106 +1,124 @@
-const API_BASE = "https://ideas-soft-backend.onrender.com";
-
 document.addEventListener('DOMContentLoaded', () => {
-    // Verificar si hay token, si no, redirigir al login
     const token = localStorage.getItem('token');
+    const email = localStorage.getItem('user_email');
+    
+    // Protección de ruta
     if (!token) {
-        window.location.href = 'login.html';
+        window.location.href = "../components/login.html";
         return;
     }
 
-    // Mostrar email del usuario
-    document.getElementById('user-display').innerText = localStorage.getItem('user_email');
-
+    // Actualizar UI del perfil
+    const userDisplay = document.getElementById('user-display-email');
+    if (userDisplay) {
+        userDisplay.innerText = email || 'Usuario';
+    }
+    
     // Cargar sección por defecto
     cargarSeccion('licencias');
 });
 
-async function cargarSeccion(tipo) {
+async function cargarSeccion(tipo, event = null) {
+    if (event) {
+        event.preventDefault();
+        // CORRECCIÓN: Usamos #panelNav que es el ID del nuevo HTML
+        document.querySelectorAll('#panelNav .nav-link').forEach(btn => btn.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+    }
+
     const container = document.getElementById('data-container');
-    const loading = document.getElementById('loading');
+    const spinner = document.getElementById('loading-spinner');
     const title = document.getElementById('section-title');
     const token = localStorage.getItem('token');
 
-    container.innerHTML = '';
-    loading.style.display = 'block';
-
-    let endpoint = "";
-    switch(tipo) {
-        case 'licencias': 
-            endpoint = "/cliente/mis-licencias-detalle"; 
-            title.innerText = "Detalle de Licencias";
-            break;
-        case 'ventas': 
-            endpoint = "/cliente/mis-ventas"; 
-            title.innerText = "Historial de Ventas";
-            break;
-        case 'pagos': 
-            endpoint = "/panel/pagos"; 
-            title.innerText = "Mis Pagos";
-            break;
-    }
+    if (spinner) spinner.style.display = 'block';
+    
+    const endpoints = {
+        licencias: "/cliente/mis-licencias-detalle",
+        ventas: "/cliente/mis-ventas",
+        pagos: "/panel/pagos"
+    };
 
     try {
-        const response = await fetch(`${API_BASE}${endpoint}`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Accept': 'application/json'
-            }
+        const response = await fetch(`https://ideas-soft-backend.onrender.com${endpoints[tipo]}`, {
+            headers: { 'Authorization': `Bearer ${token}` }
         });
 
-        if (!response.ok) throw new Error("Error al obtener datos");
+        if (!response.ok) throw new Error("No se pudo obtener la información.");
 
         const data = await response.json();
-        loading.style.display = 'none';
-
-        if (tipo === 'licencias') {
-            renderizarLicencias(data);
-        } else {
-            // Render genérico para otros strings de la API
-            container.innerHTML = `<div class="alert alert-info">${JSON.stringify(data)}</div>`;
+        
+        // Actualizar título
+        if (title) {
+            title.innerText = tipo === 'licencias' ? "Mis Licencias Activas" : 
+                            tipo === 'ventas' ? "Historial de Compras" : "Mis Pagos";
         }
 
-    } catch (error) {
-        loading.style.display = 'none';
-        container.innerHTML = `<div class="alert alert-danger">Error: ${error.message}</div>`;
+        renderizar(tipo, data);
+
+    } catch (err) {
+        container.innerHTML = `
+            <div class="p-5 text-center text-danger">
+                <i class="fas fa-exclamation-triangle fa-2x mb-2"></i>
+                <p>${err.message}</p>
+            </div>`;
+    } finally {
+        if (spinner) spinner.style.display = 'none';
     }
 }
 
-function renderizarLicencias(licencias) {
+function renderizar(tipo, data) {
     const container = document.getElementById('data-container');
-    if (!Array.isArray(licencias) || licencias.length === 0) {
-        container.innerHTML = '<p class="text-center">No tienes licencias activas actualmente.</p>';
+    
+    if (!data || data.length === 0) {
+        container.innerHTML = `<div class="p-5 text-center text-muted">No se encontraron registros en esta sección.</div>`;
         return;
     }
 
-    let html = `
-        <table class="table table-hover bg-white rounded shadow-sm">
-            <thead class="table-dark">
+    if (tipo === 'licencias') {
+        let html = `
+        <table class="table table-hover align-middle mb-0">
+            <thead>
                 <tr>
-                    <th>Software</th>
-                    <th>Clave</th>
-                    <th>Tipo</th>
-                    <th>Expiración</th>
+                    <th>Producto</th>
+                    <th>Clave de Activación</th>
+                    <th>Vencimiento</th>
                     <th>Estado</th>
+                    <th class="text-end">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
-    `;
+            <tbody>`;
+        
+        data.forEach(lic => {
+            const statusClass = lic.estado === 'activo' ? 'bg-success-subtle text-success' : 'bg-warning-subtle text-warning';
+            html += `
+                <tr>
+                    <td><span class="fw-bold text-dark">${lic.software}</span></td>
+                    <td><code class="bg-light p-2 rounded text-primary">${lic.clave_licencia}</code></td>
+                    <td>${new Date(lic.fecha_expiracion).toLocaleDateString()}</td>
+                    <td><span class="badge ${statusClass} px-3 py-2 rounded-pill text-uppercase">${lic.estado}</span></td>
+                    <td class="text-end">
+                        <button class="btn btn-sm btn-light border" title="Copiar" onclick="copyToClipboard('${lic.clave_licencia}')">
+                            <i class="far fa-copy"></i>
+                        </button>
+                        <a href="../contacto.html" class="btn btn-sm btn-primary ms-2">
+                            <i class="fas fa-headset"></i>
+                        </a>
+                    </td>
+                </tr>`;
+        });
+        
+        html += `</tbody></table>`;
+        container.innerHTML = html;
+    } else {
+        // Para Ventas o Pagos (puedes expandir esto luego)
+        container.innerHTML = `<div class="p-5 text-center text-muted">La sección ${tipo} se está procesando.</div>`;
+    }
+}
 
-    licencias.forEach(lic => {
-        const estadoClass = lic.estado === 'activo' ? 'bg-success' : 'bg-secondary';
-        html += `
-            <tr>
-                <td><strong>${lic.software}</strong></td>
-                <td><code>${lic.clave_licencia}</code></td>
-                <td>${lic.tipo_licencia}</td>
-                <td>${new Date(lic.fecha_expiracion).toLocaleDateString()}</td>
-                <td><span class="badge ${estadoClass}">${lic.estado}</span></td>
-            </tr>
-        `;
+// Función auxiliar para copiar
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        alert("¡Clave copiada al portapapeles!");
     });
-
-    html += '</tbody></table>';
-    container.innerHTML = html;
-}/*d */
+}

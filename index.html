@@ -241,38 +241,52 @@
             </div>
         </div>
     </div>
-    <script src="js/auth.js"></script>
+
+    <div id="footer"></div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/navbar.js"></script>
     <script src="js/index.js"></script>
-    <script>
-        // Función para cargar componentes dinámicos
-        async function cargarComponentes() {
+
+   <script>
+    async function cargarComponentes() {
     try {
-        // 1. Cargar Navbar
-        const resNavbar = await fetch('components/navbar.html');
-        const dataNavbar = await resNavbar.text();
-        document.getElementById('navbar').innerHTML = dataNavbar;
+        // 1. CARGAR NAVBAR
+        const resNavbar = await fetch('components/navbar.html'); 
+        const htmlNavbar = await resNavbar.text();
+        const navbarContainer = document.getElementById('navbar');
+        if (navbarContainer) {
+            navbarContainer.innerHTML = htmlNavbar;
+        }
 
-        // 2. Cargar Footer (AQUÍ ESTÁ EL TRUCO)
-        const resFooter = await fetch('components/footer.html');
-        const dataFooter = await resFooter.text();
-        
-        // Primero inyectamos el HTML en el DOM
-        document.getElementById('footer').innerHTML = dataFooter;
+        // 2. CARGAR FOOTER (Añadido)
+        const resFooter = await fetch('components/footer.html'); // Asegúrate de que esta ruta sea correcta
+        const htmlFooter = await resFooter.text();
+        const footerContainer = document.getElementById('footer');
+        if (footerContainer) {
+            footerContainer.innerHTML = htmlFooter;
+        }
 
-        // SOLO DESPUÉS de inyectarlo, llamamos a la función que busca el ID
-        console.log("Footer inyectado, cargando productos...");
-        cargarProductosFooter(); 
+        // 3. ACTUALIZAR LÓGICA DE AUTH
+        if (typeof window.actualizarNavbar === 'function') {
+            window.actualizarNavbar();
+        }
+
+        // 4. INICIALIZAR HAMBURGUESA
+        if (typeof window.initHeader === 'function') {
+            window.initHeader();
+        }
 
     } catch (error) {
-        console.error("Error cargando componentes:", error);
+        console.error("Error cargando los componentes:", error);
     }
 }
 
-        // Iniciar carga
-        cargarComponentes();
-
-    </script>
+// Ejecutar al cargar la página
+document.addEventListener('DOMContentLoaded', cargarComponentes);
+   </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
 </body>
 
 </html>

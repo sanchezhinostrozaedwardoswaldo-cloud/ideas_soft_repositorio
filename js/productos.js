@@ -1,4 +1,4 @@
-const API_URL = "https://ideas-soft-backend.onrender.com";
+
 const productContainer = document.getElementById("product-container");
 
 // Objeto para mantener el estado de los filtros actuales

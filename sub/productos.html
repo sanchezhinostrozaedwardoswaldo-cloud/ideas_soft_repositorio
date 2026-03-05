@@ -67,9 +67,52 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/main.js"></script>
-    <script src="../js/productos.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+ <script src="../js/auth.js"></script>
+<script src="../js/navbar.js"></script> 
+<script src="../js/main.js"></script>
+
+<script src="../js/productos.js"></script>
+
+<script>
+async function cargarComponentes() {
+    try {
+        console.log("1. Iniciando carga de componentes...");
+        const resNavbar = await fetch('../components/navbar.html');
+        document.getElementById('navbar').innerHTML = await resNavbar.text();
+        console.log("2. Navbar inyectado");
+
+        const resFooter = await fetch('../components/footer.html');
+        document.getElementById('footer').innerHTML = await resFooter.text();
+        console.log("3. Footer inyectado");
+
+        // Un pequeño respiro para el navegador
+        setTimeout(() => {
+            console.log("4. Intentando Auth...");
+            if (window.actualizarNavbar) {
+                window.actualizarNavbar();
+                console.log("✅ Auth ejecutado con éxito");
+            }
+
+            console.log("5. Intentando Productos...");
+            if (window.inicializarPaginaProductos) {
+                window.inicializarPaginaProductos();
+                console.log("✅ Productos ejecutados con éxito");
+            } else {
+                console.error("❌ ERROR: La función inicializarPaginaProductos sigue sin detectarse.");
+            }
+
+            if (window.initHeader) window.initHeader();
+        }, 100);
+
+    } catch (error) {
+        console.error("🚨 Error fatal:", error);
+    }
+}
+document.addEventListener('DOMContentLoaded', cargarComponentes);
+</script>
 </body>
 
 </html>
