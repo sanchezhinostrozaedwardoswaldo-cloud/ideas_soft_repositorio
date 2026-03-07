@@ -1,4 +1,3 @@
-const API_URL = "https://ideas-soft-backend.onrender.com";
 const idSoftware = new URLSearchParams(window.location.search).get('id');
 
 // Al final de cargarPaginaDetalle()

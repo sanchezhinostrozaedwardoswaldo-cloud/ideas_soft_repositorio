@@ -2,7 +2,7 @@
   <nav class="navbar-container">
     
     <a class="logo" href="/index.html">
-      <span class="logo-icon">&lt;/&gt;</span>
+      <img src="/assets/img/Imagen1-Photoroom.png" alt="Logo IdeasSoft" class="logo-img">
       <span class="logo-text">IdeasSoft</span>
     </a>
 
@@ -25,11 +25,25 @@
       </div>
 
       <div id="auth-section">
-        <a href="/components/login.html" class="btn-login">
-          <i class="far fa-user"></i>
-          <span class="btn-text">Ingresar</span>
+  <div class="dropdown">
+    <button class="btn-login dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="far fa-user"></i>
+      <span class="visually-hidden">Cuenta</span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end shadow-lg" aria-labelledby="loginDropdown">
+      <li>
+        <a class="dropdown-item" href="/components/login.html">
+          <i class="fas fa-sign-in-alt me-2"></i> Iniciar Sesión
         </a>
-      </div>
+      </li>
+      <li>
+        <a class="dropdown-item" href="/components/register.html">
+          <i class="fas fa-user-plus me-2"></i> Registrarse
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
 
       <div id="auth-logged-in" style="display: none;">
         <div class="d-flex align-items-center gap-2">

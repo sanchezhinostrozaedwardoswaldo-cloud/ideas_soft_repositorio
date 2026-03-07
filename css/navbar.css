@@ -2,7 +2,7 @@
    1. VARIABLES Y BASE
    ================================================================ */
 :root {
-  --header-height: 70px;
+  --header-height: 85px; /* Aumentado ligeramente para acomodar mejor el logo */
   --header-bg: #0b1120;
   --header-border: rgba(255, 255, 255, 0.1);
   --blue: #007bff;
@@ -29,40 +29,50 @@ header.main-header,
   align-items: center;
 }
 
-/* ESTRUCTURA GRID: Logo | Menú | Acciones */
+/* ESTRUCTURA GRID MEJORADA: Permitimos que el logo use el espacio necesario */
 .navbar-container {
   display: grid;
-  grid-template-columns: 220px 1fr 220px;
+  grid-template-columns: auto 1fr auto; /* Cambiado 220px por 'auto' para evitar que el logo se vea pequeño */
   align-items: center;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 20px;
+  gap: 20px;
 }
 
 /* ================================================================
-   2. ELEMENTOS ESTÁTICOS (LOGO Y MENÚ)
+   2. LOGO Y MENÚ
    ================================================================ */
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   text-decoration: none;
   justify-self: start;
 }
 
-.logo-icon {
-  background-color: var(--blue);
-  color: white;
-  padding: 5px 10px;
-  border-radius: 6px;
-  font-weight: bold;
+.logo-img {
+  height: 60px !important; /* Tamaño corregido para que se vea grande y nítido */
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 5px rgba(0, 123, 255, 0.2));
+  transition: transform 0.3s ease;
 }
 
-.logo-text { color: white; font-weight: 700; font-size: 1.25rem; }
+.logo:hover .logo-img {
+  transform: scale(1.05); /* Efecto sutil al pasar el mouse */
+}
+
+.logo-text { 
+  color: white; 
+  font-weight: 700; 
+  font-size: 1.5rem; /* Un poco más grande para acompañar al logo */
+  letter-spacing: 0.5px;
+}
 
 .nav-menu {
-  display: flex; /* Visible en PC */
+  display: flex;
   list-style: none;
   gap: 25px;
   margin: 0;
@@ -81,7 +91,7 @@ header.main-header,
 .nav-menu a:hover, .nav-menu a.active { color: var(--blue); }
 
 /* ================================================================
-   3. BOTONES DE ACCIÓN (LOS "CUADRITOS")
+   3. BOTONES DE ACCIÓN
    ================================================================ */
 .nav-auth {
   display: flex;
@@ -90,7 +100,7 @@ header.main-header,
   justify-self: end;
 }
 
-/* UNIFICACIÓN: Estilo para botón de login, botón de usuario JS y hamburguesa */
+
 .btn-login, 
 .nav-icon-btn,
 .hamburger-btn {
@@ -98,21 +108,20 @@ header.main-header,
   border: 1px solid var(--header-border) !important;
   color: white !important;
   border-radius: 8px !important;
-  height: 40px;
+  height: 42px;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   transition: all 0.3s ease;
   cursor: pointer;
   text-decoration: none;
-  box-shadow: none !important;
+
 }
 
-/* --- SOLUCIÓN AL PROBLEMA: Hamburguesa OCULTA en PC --- */
+
 .hamburger-btn {
-  display: none !important; /* Desaparece en PC/Laptop */
-  width: 40px;
-  padding: 0 !important;
+  display: none !important; /* Oculto en PC */
+  width: 42px;
 }
 
 .btn-login, .nav-icon-btn {
@@ -121,12 +130,13 @@ header.main-header,
 
 .btn-login:hover, .nav-icon-btn:hover, .hamburger-btn:hover {
   background-color: var(--btn-hover) !important;
+  border-color: var(--blue) !important;
 }
 
-/* Email Truncado (Para que no empuje el diseño) */
+/* Email y Textos */
 .user-email-text, .btn-text {
   font-size: 0.85rem;
-  max-width: 130px;
+  max-width: 140px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -137,63 +147,82 @@ header.main-header,
 .cart-container {
   color: white;
   position: relative;
-  font-size: 1.2rem;
-  margin-right: 5px;
+  font-size: 1.3rem;
+  margin-right: 10px;
   cursor: pointer;
+  transition: transform 0.2s ease;
 }
+
+.cart-container:hover { transform: scale(1.1); }
 
 .cart-badge {
   background: var(--blue);
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   position: absolute;
   top: -8px; right: -10px;
   width: 18px; height: 18px;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
+  font-weight: bold;
 }
 
-/* Dropdown del Usuario (Fondo oscuro) */
+/* Dropdown */
 .dropdown-menu {
   background-color: #161d31 !important;
   border: 1px solid var(--header-border) !important;
+  margin-top: 15px !important;
 }
 
-.dropdown-item { color: var(--nav-link) !important; }
-.dropdown-item:hover { background-color: rgba(255,255,255,0.05) !important; color: white !important; }
+.dropdown-toggle::after { display: none !important; }
+
+.dropdown-item { color: var(--nav-link) !important; padding: 10px 20px !important; }
+
+.dropdown-item:hover { 
+  background-color: rgba(255,255,255,0.05) !important; 
+  color: white !important; 
+}
 
 /* ================================================================
    4. RESPONSIVE (MÓVIL Y TABLET)
    ================================================================ */
 @media (max-width: 991px) {
+  .main-header { height: 70px; }
+  
   .navbar-container {
     display: flex;
     justify-content: space-between;
   }
-  
-  /* Ocultamos menú horizontal */
+
+  .logo-img { height: 45px !important; }
+  .logo-text { font-size: 1.2rem; }
+
   .nav-menu {
     display: none; 
     flex-direction: column;
     position: absolute;
-    top: var(--header-height);
+    top: 70px;
     left: 0; width: 100%;
     background: #0f172a;
     padding: 20px;
     border-bottom: 1px solid var(--header-border);
   }
 
-  /* --- ACTIVAMOS Hamburguesa en móvil --- */
-  .hamburger-btn {
-    display: flex !important;
-  }
-
+  .hamburger-btn { display: flex !important; }
   .nav-menu.active { display: flex; }
 
-  /* En móvil el botón de usuario se vuelve solo icono cuadrado */
+
   .btn-text, .user-email-text { display: none; }
-  .btn-login, .nav-icon-btn { width: 40px; padding: 0 !important; }
+  .btn-login, .nav-icon-btn { width: 42px; padding: 0 !important; }
 }
 
-/* REGLAS DE TEXTO PERSONALIZADAS */
-.tagline { color: var(--white) !important; } /* tecnología que impulsa tu crecimiento */
-.services-highlight { color: #000000 !important; font-weight: bold; } /* servicio tecnologicos */
+/* ================================================================
+   5. REGLAS DE MARCA REQUERIDAS
+   ================================================================ */
+.tagline { 
+  color: var(--white) !important; 
+} /* 'tecnología que impulsa tu crecimiento' siempre blanco */
+
+.services-highlight { 
+  color: #000000 !important; 
+  font-weight: bold; 
+} /* 'servicio tecnologicos' siempre negro */
