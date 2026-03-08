@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>IdeasSoft - Crear Cuenta</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        .auth-container { max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #fff; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .auth-form input, .auth-form select { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .btn-auth { width: 100%; padding: 12px; background: #365386; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .btn-auth:disabled { background: #7a8ca5; cursor: not-allowed; }
+        .btn-auth:hover { background: #4a6da7; }
+    </style>
+</head>
+<body style="background-color: #f4f7f9;">
+
+<div class="auth-container">
+    <h2 style="text-align: center; color: #002e5b;">Crear Cuenta</h2>
+
+    <form class="auth-form" id="registroForm">
+        <select id="tipo_cliente" required>
+            <option value="" disabled selected>Seleccione tipo de cliente</option>
+            <option value="persona_natural">Persona Natural</option>
+            <option value="empresa">Persona Jurídica (Empresa)</option>
+        </select>
+
+        <input type="text" id="nombre_completo" placeholder="Nombre Completo" required>
+        <input type="text" id="dni" placeholder="DNI (8 dígitos)" required maxlength="8" pattern="[0-9]{8}">
+        <input type="email" id="reg_email" placeholder="Correo Electrónico" required>
+        <input type="password" id="reg_password" placeholder="Contraseña" required minlength="6">
+        <input type="text" id="telefono" placeholder="Teléfono" required>
+        <input type="text" id="direccion" placeholder="Dirección" required>
+
+        <input type="text" id="nombre_empresa" placeholder="Nombre de la Empresa (Opcional)">
+        <input type="text" id="ruc" placeholder="RUC (11 dígitos, Opcional)" maxlength="11" pattern="[0-9]{11}">
+
+        <button type="submit" class="btn-auth">Registrarse</button>
+    </form>
+
+    <p style="text-align: center; font-size: 0.9rem; margin-top: 15px;">
+        ¿Ya tienes cuenta? <a href="login.html" style="color: #4a6da7;">Inicia sesión aquí</a>
+    </p>
+</div>
+
+<script src="../js/auth.js"></script>
+</body>
+</html>

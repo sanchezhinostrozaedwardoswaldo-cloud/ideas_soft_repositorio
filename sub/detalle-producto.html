@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IdeasSoft - Nexus ERP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/detalle_producto_premium.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/footer.css">
+</head>
+<body class="bg-light">
+
+<div id="navbar"></div>
+
+<main>
+    <section class="header-details bg-dark text-white py-5">
+        <div class="container">
+            <div class="header-content-wrapper">
+                <a href="productos.html" class="back-link mt-4">
+                    <br><br><br>
+                    <i class="fas fa-arrow-left me-2"></i> Volver a productos
+                </a>
+                <h1 id="det-titulo" class="display-3 fw-bold mt-3">Nexus ERP</h1>
+                <span id="det-categoria" class="badge rounded-pill bg-primary px-3 py-2">Software Empresarial</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-body bg-white py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="preview-container mb-4">
+                        <img id="det-img" src="../assets/img/placeholder.jpg" class="img-fluid rounded-4 shadow-sm w-100" alt="Nexus ERP Preview">
+                    </div>
+
+                    <div class="demo-box d-flex justify-content-between align-items-center p-4 rounded-4 mb-4 shadow-sm border">
+                        <div>
+                            <h5 class="fw-bold text-dark mb-1">¿Quieres probarlo?</h5>
+                            <p class="text-muted mb-0 small">Solicita una demostración en vivo de este software.</p>
+                        </div>
+                        <button type="button" class="btn btn-primary rounded-pill px-4 shadow-sm">
+                            <i class="fas fa-desktop me-2"></i> Solicitar Demo
+                        </button>
+                    </div>
+
+                    <div class="description-text">
+                        <h4 class="fw-bold text-dark mb-3">Descripción</h4>
+                        <p id="det-descripcion" class="text-muted lh-lg">
+                            Sistema de gestión empresarial integral para optimizar tus procesos.
+                        </p>
+                    </div>
+                    <section class="container mt-5">
+    <div class="row">
+        <div class="col-md-7">
+            <h4 class="fw-bold mb-4">Opiniones de clientes</h4>
+            <div id="lista-resenas">
+                <p class="text-muted">Cargando comentarios...</p>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="card p-4 border-0 shadow-sm bg-light">
+                <h5 class="fw-bold">Deja tu opinión</h5>
+                <form id="form-resena" onsubmit="enviarResena(event)">
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Calificación</label>
+                        <select id="res-calificacion" class="form-select" required>
+                            <option value="5">⭐⭐⭐⭐⭐ (Excelente)</option>
+                            <option value="4">⭐⭐⭐⭐ (Muy bueno)</option>
+                            <option value="3">⭐⭐⭐ (Regular)</option>
+                            <option value="2">⭐⭐ (Malo)</option>
+                            <option value="1">⭐ (Muy malo)</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Comentario</label>
+                        <textarea id="res-comentario" class="form-control" rows="3" placeholder="Cuéntanos tu experiencia con el software..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Publicar reseña</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="sidebar-sticky-container">
+                        <!-- Licencia Perpetua -->
+                        <div class="card border-0 shadow-lg p-4 mb-4 card-buy-premium">
+                            <span class="badge-mejor-valor">MEJOR VALOR</span>
+                            <small class="text-muted fw-bold text-uppercase">Licencia perpetua</small>
+                            <h2 class="fw-bold text-primary display-5 mt-2">
+                                $<span id="det-precio-perpetuo">0.00</span>
+                            </h2>
+                            
+                            <div class="d-flex gap-2 mt-3">
+                                <button type="button" class="btn btn-primary flex-grow-1"
+                                        onclick="Carrito.agregar(getIdFromUrl(), 1, 'venta')">
+                                    Comprar perpetuo
+                                </button>
+                                <button type="button" class="btn btn-outline-primary btn-cart-circle"
+                                        onclick="Carrito.agregar(getIdFromUrl(), 1, 'venta')">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Suscripción Mensual -->
+                        <div class="card border-0 shadow-sm p-4 mb-4 bg-light-soft">
+                            <small class="text-muted fw-bold text-uppercase">Suscripción mensual</small>
+                            <h2 class="fw-bold text-dark mt-2">
+                                $<span id="det-precio-mensual">0.00</span>
+                                <small class="fs-6 text-muted">/mes</small>
+                            </h2>
+                            <button type="button" class="btn btn-outline-primary w-100"
+                                    onclick="Carrito.agregar(getIdFromUrl(), 1, 'suscripcion')">
+                                Suscribirse mensual
+                            </button>
+                        </div>
+
+                        <div class="text-center">
+                            <p class="text-black fw-bold mb-1">servicio tecnologicos</p>
+                            <div class="bg-dark p-2 rounded shadow-sm">
+                                <small class="text-white">tecnologia que impulsa tu crecimiento</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div id="footer"></div>
+
+<script src="../js/carrito.js"></script>
+
+
+<script src="../js/detalles.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/productos.js"></script>
+
+<!-- Helper para obtener id de la URL (puedes moverlo a un archivo js si prefieres) -->
+<script>
+    function getIdFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+        if (!id || isNaN(parseInt(id))) {
+            console.warn("No se encontró ID válido en la URL");
+            return null;
+        }
+        return parseInt(id);
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

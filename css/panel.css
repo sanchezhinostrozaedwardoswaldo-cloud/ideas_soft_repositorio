@@ -1,0 +1,53 @@
+/* Ajustes de Integración Global */
+.main-wrapper {
+    min-height: calc(100vh - 160px); /* Ajuste para el footer */
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-hero {
+    background: linear-gradient(135deg, #1a1d20 0%, #212529 100%) !important;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    /* Mantenemos el padding inferior para el efecto de flotado suave */
+    padding-bottom: 70px !important; 
+}
+
+/* CORRECCIÓN DE ESPACIADO: Bajamos la sección */
+.mt-n4 {
+    margin-top: -40px !important; /* Un "flotado" mucho más sutil */
+}
+
+/* Estilo de los botones del panel (Ahora 5 opciones) */
+#panelNav .nav-link {
+    border: none;
+    color: #495057;
+    font-weight: 600;
+    font-size: 0.95rem; /* Ligera reducción para que quepan 5 bien */
+    transition: all 0.2s ease-in-out;
+    border-bottom: 3px solid transparent !important;
+}
+
+#panelNav .nav-link:hover {
+    background-color: #f1f4f9;
+    color: #0d6efd;
+}
+
+#panelNav .nav-link.active {
+    color: #0d6efd !important;
+    border-bottom: 3px solid #0d6efd !important;
+    background-color: #fff;
+}
+
+/* Tablas con estilo de producto */
+.table thead th {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    font-size: 0.85rem;
+    padding: 1.25rem;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody td {
+    padding: 1.25rem;
+    vertical-align: middle;
+}

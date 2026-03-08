@@ -1,0 +1,182 @@
+:root {
+    --primary: #2563eb;
+    --dark-bg: #0b1a33;
+    --light-bg: #f3f4f6;
+    --text-dark: #1f2937;
+    --text-light: #6b7280;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* ================= HERO ================= */
+
+.about-hero {
+    background: var(--dark-bg);
+    color: white;
+    text-align: center;
+    padding: 100px 0 120px;
+}
+
+.breadcrumb {
+    font-size: 14px;
+    color: #9ca3af;
+    margin-bottom: 10px;
+}
+
+.breadcrumb span {
+    color: #cbd5e1;
+}
+
+.section-label {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #93c5fd;
+    margin-bottom: 20px;
+}
+
+.about-hero h1 {
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.highlight {
+    color: var(--primary);
+}
+
+.hero-text {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 18px;
+    color: #cbd5e1;
+    line-height: 1.6;
+}
+
+/* ================= CONTENT ================= */
+
+.about-content {
+    background: var(--light-bg);
+    padding: 100px 0;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.about-card {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    transition: 0.3s ease;
+}
+
+.about-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+.icon-box {
+    width: 60px;
+    height: 60px;
+    background: #e0e7ff;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+.about-card h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: var(--text-dark);
+}
+
+.about-card p {
+    color: var(--text-light);
+    line-height: 1.6;
+    font-size: 15px;
+}
+/* ================= TEAM SECTION ================= */
+
+.team-section {
+    background: #f3f4f6;
+    padding: 100px 0;
+    text-align: center;
+}
+
+.team-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 10px;
+}
+
+.team-subtitle {
+    color: #6b7280;
+    font-size: 16px;
+    margin-bottom: 60px;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.team-card {
+    background: white;
+    padding: 40px 20px;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    transition: 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #2563eb, #1e3a8a);
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.team-card h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 5px;
+}
+
+.team-card p {
+    font-size: 14px;
+    color: #6b7280;
+}

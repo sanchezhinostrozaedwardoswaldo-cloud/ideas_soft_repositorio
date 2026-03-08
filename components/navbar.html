@@ -1,0 +1,139 @@
+<header class="main-header">
+  <nav class="navbar-container">
+    
+    <a class="logo" href="/index.html">
+      <span class="logo-icon">&lt;/&gt;</span>
+      <span class="logo-text">IdeasSoft</span>
+    </a>
+
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="/index.html" class="active">Inicio</a></li>
+      <li><a href="/sub/productos.html">Productos</a></li>
+      <li><a href="/sub/precio.html">Precios</a></li>
+      <li><a href="/sub/nosotros.html">Nosotros</a></li>
+      <li><a href="/sub/contacto.html">Contacto</a></li>
+    </ul>
+
+    <div class="nav-auth">
+
+      <div class="cart-container"
+           data-bs-toggle="offcanvas"
+           data-bs-target="#offcanvasCarrito"
+           aria-controls="offcanvasCarrito">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-badge">0</span>
+      </div>
+
+      <div id="auth-section">
+        <a href="/components/login.html" class="btn-login">
+          <i class="far fa-user"></i>
+          <span class="btn-text">Ingresar</span>
+        </a>
+      </div>
+
+      <div id="auth-logged-in" style="display: none;">
+        <div class="d-flex align-items-center gap-2">
+          <span id="user-name" class="text-white d-none d-md-inline" style="font-size: 0.85rem;"></span>
+          <button onclick="logout()" class="btn-login logout-style">
+            <i class="fas fa-sign-out-alt"></i>
+            <span class="btn-text">Salir</span>
+          </button>
+        </div>
+      </div>
+
+      <button class="hamburger-btn" id="menuToggle" aria-label="Abrir menú">
+        <i class="fas fa-bars" id="hamburger-icon"></i>
+      </button>
+
+    </div>
+  </nav>
+</header>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCarrito" aria-labelledby="offcanvasCarritoLabel">
+  <div class="offcanvas-header border-bottom">
+    <h5 class="offcanvas-title" id="offcanvasCarritoLabel">
+      <i class="fas fa-box-open me-2"></i> Mis productos
+    </h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+  </div>
+
+  <div class="offcanvas-body p-0" id="carrito-body">
+    <div class="text-center py-5 text-muted">
+      <i class="fas fa-shopping-cart fa-3x mb-3"></i>
+      <p>Cargando productos...</p>
+    </div>
+  </div>
+
+  <div class="offcanvas-footer p-3 border-top bg-light">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <strong>Total:</strong>
+      <span id="total-carrito" class="fw-bold fs-5">$0.00</span>
+    </div>
+    <button class="btn-finalizar w-100" onclick="confirmarCompra()">
+      FINALIZAR COMPRA
+    </button>
+  </div>
+</div>
+
+<!-- El JS del menú está en js/navbar.js (innerHTML no ejecuta scripts) -->
+
+<!-- Offcanvas Carrito -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCarrito" aria-labelledby="offcanvasCarritoLabel">
+  <div class="offcanvas-header border-bottom">
+    <h5 class="offcanvas-title" id="offcanvasCarritoLabel">
+      <i class="fas fa-box-open me-2"></i> Mis productos
+    </h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+  </div>
+
+  <div class="offcanvas-body p-0" id="carrito-body">
+    <div class="text-center py-5 text-muted">
+      <i class="fas fa-shopping-cart fa-3x mb-3"></i>
+      <p>Cargando productos...</p>
+    </div>
+  </div>
+
+  <div class="offcanvas-footer p-3 border-top bg-light">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <strong>Total:</strong>
+      <span id="total-carrito" class="fw-bold fs-5">$0.00</span>
+    </div>
+    <button class="btn-finalizar w-100" onclick="confirmarCompra()">
+      FINALIZAR COMPRA
+    </button>
+  </div>
+</div>
+
+<script>
+  function initHeader() {
+  const toggle = document.getElementById('menuToggle');
+  const menu = document.getElementById('navMenu');
+  const icon = document.getElementById('hamburger-icon');
+
+  // Si no encuentra los elementos, salimos para evitar errores
+  if (!toggle || !menu || !icon) return;
+
+  // Simplificamos: No clones el nodo a menos que sea estrictamente necesario
+  // Solo removemos y agregamos el listener limpiamente
+  toggle.onclick = (e) => {
+    e.stopPropagation();
+    const isOpen = menu.classList.toggle('active');
+    
+    // Cambiar ícono
+    icon.className = isOpen ? 'fas fa-times' : 'fas fa-bars';
+    toggle.setAttribute('aria-expanded', isOpen);
+  };
+
+  // ... resto de tu lógica de cerrar al clickear links ...
+}
+
+// SI USAS FETCH PARA CARGAR EL HEADER:
+/*
+fetch('header.html')
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById('header-placeholder').innerHTML = data;
+    initHeader(); // <--- IMPORTANTE: Llamarla aquí
+  });
+*/
+</script>

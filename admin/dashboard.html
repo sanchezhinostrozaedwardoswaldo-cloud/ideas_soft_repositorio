@@ -1,0 +1,317 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IdeasSoft - Panel Administrativo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/admin/css/admin.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>IDEAS SOFT</h2>
+                <span>Control Center</span>
+            </div>
+            <nav class="sidebar-menu">
+                <ul>
+                    <li class="active"><a href="#section-dashboard" data-nav-target="section-dashboard"><i class="fas fa-house"></i> Dashboard</a></li>
+                    <li><a href="#section-productos" data-nav-target="section-productos"><i class="fas fa-box"></i> Productos</a></li>
+                    <li><a href="#section-clientes" data-nav-target="section-clientes"><i class="fas fa-users"></i> Clientes</a></li>
+                    <li><a href="#section-pagos" data-nav-target="section-pagos"><i class="fas fa-credit-card"></i> Pagos</a></li>
+                    <li><a href="#section-licencias" data-nav-target="section-licencias"><i class="fas fa-key"></i> Licencias</a></li>
+                    <li><a href="#section-reportes" data-nav-target="section-reportes"><i class="fas fa-chart-line"></i> Reportes</a></li>
+                    <li><a href="#section-soporte" data-nav-target="section-soporte"><i class="fas fa-headset"></i> Soporte</a></li>
+                    <li class="separator"></li>
+                    <li>
+                        <a href="../index.html" class="view-site-link">
+                            <i class="fas fa-external-link-alt"></i> Ver Sitio Web
+                        </a>
+                    </li>
+                    <li><a href="#section-configuracion" data-nav-target="section-configuracion"><i class="fas fa-gear"></i> Configuración</a></li>
+                    <li><a href="javascript:void(0)" onclick="logout()" class="logout-link"><i class="fas fa-right-from-bracket"></i> Salir</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="global-search" placeholder="Buscar en pagos, clientes y tickets...">
+                </div>
+                <div class="admin-profile">
+                    <span id="admin-name">Administrador</span>
+                    <img src="/assets/img/user.jpg" alt="Avatar" height="35" width="35">
+                </div>
+            </header>
+
+            <section class="content-body" id="dynamic-content">
+                <div class="welcome-banner" id="section-dashboard">
+                    <h1>Resumen ejecutivo</h1>
+                    <p>Supervisa ventas, clientes y licencias en una sola vista operativa.</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card" id="section-licencias">
+                        <div class="stat-icon"><i class="fas fa-sack-dollar"></i></div>
+                        <div class="stat-content">
+                            <h3>Ventas hoy</h3>
+                            <p id="kpi-sales-value">S/ 0</p>
+                            <small id="kpi-sales-meta">Cargando...</small>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-user-plus"></i></div>
+                        <div class="stat-content">
+                            <h3>Nuevos clientes</h3>
+                            <p id="kpi-clients-value">0</p>
+                            <small id="kpi-clients-meta">Cargando...</small>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-key"></i></div>
+                        <div class="stat-content">
+                            <h3>Licencias activas</h3>
+                            <p id="kpi-licenses-value">0</p>
+                            <small id="kpi-licenses-meta">Cargando...</small>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-ticket"></i></div>
+                        <div class="stat-content">
+                            <h3>Tickets abiertos</h3>
+                            <p id="kpi-payments-value">0</p>
+                            <small id="kpi-payments-meta">Cargando...</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <article class="panel-card panel-chart" id="section-reportes">
+                        <div class="panel-head">
+                            <h2>Rendimiento mensual</h2>
+                            <span class="badge-positive" id="kpi-trend">0%</span>
+                        </div>
+                        <svg viewBox="0 0 560 220" class="line-chart" aria-label="Gráfico de rendimiento" id="sales-chart">
+                            <polyline id="line-shadow" points="30,185 110,160 190,170 270,130 350,120 430,98 510,70" class="line-shadow"></polyline>
+                            <polyline id="line-main" points="30,185 110,160 190,170 270,130 350,120 430,98 510,70" class="line-main"></polyline>
+                            <g class="points" id="line-points"></g>
+                        </svg>
+                    </article>
+
+                    <article class="panel-card panel-list">
+                        <div class="panel-head">
+                            <h2>Estado de servicios</h2>
+                        </div>
+                        <ul class="status-list" id="status-list">
+                            <li><span>Comprobando servicios...</span><strong class="warn">Cargando</strong></li>
+                        </ul>
+                    </article>
+                </div>
+
+                <article class="panel-card">
+                    <div class="panel-head">
+                        <h2>Actividad reciente</h2>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="activity-table">
+                            <thead>
+                                <tr>
+                                    <th>Hora</th>
+                                    <th>Cliente</th>
+                                    <th>Acción</th>
+                                    <th>Monto</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="activity-body">
+                                <tr>
+                                    <td colspan="5" class="table-empty">Cargando actividad...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <div class="dashboard-grid">
+                <article class="panel-card" id="section-pagos">
+                    <div class="panel-head">
+                        <h2>Gestión de Pagos</h2>
+                        <div class="head-actions">
+                            <button class="btn-ui btn-secondary" id="export-payments">Exportar Excel</button>
+                            <button class="btn-ui btn-secondary" id="refresh-payments">Actualizar</button>
+                        </div>
+                    </div>
+                        <div class="table-tools">
+                            <select id="payments-status-filter" class="status-input">
+                                <option value="all">Todos los estados</option>
+                                <option value="aprobado">Aprobado</option>
+                                <option value="pendiente">Pendiente</option>
+                                <option value="rechazado">Rechazado</option>
+                            </select>
+                            <input type="date" id="payments-date-from" class="status-input" aria-label="Pagos desde">
+                            <input type="date" id="payments-date-to" class="status-input" aria-label="Pagos hasta">
+                            <button class="btn-ui btn-secondary" id="payments-clear-filters">Limpiar</button>
+                        </div>
+                        <div class="table-wrapper">
+                            <table class="activity-table">
+                                <thead>
+                                    <tr>
+                                        <th><button class="sort-btn" data-sort-table="payments" data-sort-key="id">ID <span class="sort-indicator">-</span></button></th>
+                                        <th><button class="sort-btn" data-sort-table="payments" data-sort-key="cliente">Cliente <span class="sort-indicator">-</span></button></th>
+                                        <th><button class="sort-btn" data-sort-table="payments" data-sort-key="monto">Monto <span class="sort-indicator">-</span></button></th>
+                                        <th><button class="sort-btn" data-sort-table="payments" data-sort-key="estado">Estado <span class="sort-indicator">-</span></button></th>
+                                        <th>Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="payments-body">
+                                    <tr><td colspan="5" class="table-empty">Cargando pagos...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="pagination-bar">
+                            <button class="btn-ui btn-secondary" id="payments-prev">Anterior</button>
+                            <span id="payments-page-info">Página 1 de 1</span>
+                            <button class="btn-ui btn-secondary" id="payments-next">Siguiente</button>
+                        </div>
+                    </article>
+
+                    <article class="panel-card panel-list">
+                        <div class="panel-head">
+                            <h2>Software Top</h2>
+                        </div>
+                        <ul class="status-list" id="top-software-list">
+                            <li><span>Cargando ranking...</span><strong class="warn">...</strong></li>
+                        </ul>
+                    </article>
+                </div>
+
+                <article class="panel-card" id="section-clientes">
+                    <div class="panel-head">
+                        <h2>Clientes Registrados</h2>
+                        <button class="btn-ui btn-secondary" id="export-clients">Exportar Excel</button>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="activity-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Email</th>
+                                    <th>Rol</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clients-body">
+                                <tr><td colspan="5" class="table-empty">Cargando clientes...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <article class="panel-card" id="section-soporte">
+                    <div class="panel-head">
+                        <h2>Tickets de Soporte</h2>
+                        <button class="btn-ui btn-secondary" id="export-tickets">Exportar Excel</button>
+                    </div>
+                    <div class="table-tools">
+                        <select id="tickets-status-filter" class="status-input">
+                            <option value="all">Todos los estados</option>
+                            <option value="abierto">Abierto</option>
+                            <option value="pendiente">Pendiente</option>
+                            <option value="cerrado">Cerrado</option>
+                            <option value="resuelto">Resuelto</option>
+                        </select>
+                        <input type="date" id="tickets-date-from" class="status-input" aria-label="Tickets desde">
+                        <input type="date" id="tickets-date-to" class="status-input" aria-label="Tickets hasta">
+                        <button class="btn-ui btn-secondary" id="tickets-clear-filters">Limpiar</button>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="activity-table">
+                            <thead>
+                                <tr>
+                                    <th><button class="sort-btn" data-sort-table="tickets" data-sort-key="id">ID <span class="sort-indicator">-</span></button></th>
+                                    <th><button class="sort-btn" data-sort-table="tickets" data-sort-key="usuario">Usuario <span class="sort-indicator">-</span></button></th>
+                                    <th><button class="sort-btn" data-sort-table="tickets" data-sort-key="asunto">Asunto <span class="sort-indicator">-</span></button></th>
+                                    <th><button class="sort-btn" data-sort-table="tickets" data-sort-key="estado">Estado <span class="sort-indicator">-</span></button></th>
+                                    <th><button class="sort-btn" data-sort-table="tickets" data-sort-key="fecha">Fecha <span class="sort-indicator">-</span></button></th>
+                                </tr>
+                            </thead>
+                            <tbody id="tickets-body">
+                                <tr><td colspan="5" class="table-empty">Cargando tickets...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination-bar">
+                        <button class="btn-ui btn-secondary" id="tickets-prev">Anterior</button>
+                        <span id="tickets-page-info">Página 1 de 1</span>
+                        <button class="btn-ui btn-secondary" id="tickets-next">Siguiente</button>
+                    </div>
+                </article>
+
+                <div class="forms-grid">
+                    <article class="panel-card" id="section-productos">
+                        <div class="panel-head">
+                            <h2>Inventario</h2>
+                        </div>
+                        <form id="create-software-form" class="admin-form">
+                            <h3>Crear Software</h3>
+                            <input type="text" name="nombre" placeholder="Nombre del software" required>
+                            <input type="number" step="0.01" name="precio" placeholder="Precio" required>
+                            <textarea name="descripcion" placeholder="Descripción"></textarea>
+                            <button type="submit" class="btn-ui">Crear (POST /software/Crear)</button>
+                        </form>
+
+                        <form id="deactivate-software-form" class="admin-form">
+                            <h3>Desactivar Software</h3>
+                            <input type="number" name="id_software" placeholder="ID del software" required>
+                            <button type="submit" class="btn-ui btn-warning">Desactivar (PATCH /software/{id}/desactivar)</button>
+                        </form>
+                    </article>
+
+                    <article class="panel-card" id="section-configuracion">
+                        <div class="panel-head">
+                            <h2>Configuración</h2>
+                        </div>
+                        <form id="config-form" class="admin-form">
+                            <h3>Cambiar Configuración Global</h3>
+                            <input type="text" name="clave" placeholder="Clave (ej: telefono_contacto)" required>
+                            <input type="text" name="valor" placeholder="Nuevo valor" required>
+                            <button type="submit" class="btn-ui">Guardar (PUT /admin/configuracion/{clave})</button>
+                        </form>
+
+                        <form id="create-user-form" class="admin-form">
+                            <h3>Crear Usuario Interno</h3>
+                            <input type="text" name="nombre" placeholder="Nombre completo" required>
+                            <input type="email" name="email" placeholder="Email" required>
+                            <input type="password" name="password" placeholder="Contraseña temporal" required>
+                            <input type="text" name="rol" placeholder="Rol (admin, soporte, ventas)" required>
+                            <button type="submit" class="btn-ui">Crear (POST /admin/usuarios/Crear)</button>
+                        </form>
+                    </article>
+                </div>
+
+                <p class="feedback-msg" id="admin-feedback"></p>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin-dashboard.js"></script>
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.querySelector('.sidebar');
+
+        if (menuToggle && sidebar) {
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('open');
+            });
+        }
+    </script>
+</body>
+</html>

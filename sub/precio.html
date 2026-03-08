@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IdeasSoft - Precios</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/precio.css">
+</head>
+<body>
+    
+    <div id="navbar"></div>
+
+    <main>
+        <section class="pricing-section-dark">
+            <div class="container">
+                <div class="pricing-header-centered">
+                    <h2>Planes y Precios</h2>
+                    <p>Elija el plan que mejor se adapte a las necesidades de su empresa.</p>
+                    
+                    <div class="billing-switcher">
+                        <button class="switcher-btn active" id="monthlyBtn">
+                            Mensual
+                        </button>
+                        <button class="switcher-btn" id="annualBtn">
+                            Anual <span class="discount">-17%</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="pricing-section-light">
+          
+            <div class="container">
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3 class="plan-name">Starter</h3>
+                        <p class="plan-subtitle">Ideal para emprendedores y pequeñas empresas.</p>
+                        <div class="price-box">
+                            <span class="currency">$</span>
+                            <span class="amount" data-monthly="49">49</span>
+                            <span class="period">/mes</span>
+                        </div>
+                        <ul class="features-list">
+                            <li><i class="fas fa-check"></i> 1 producto incluido</li>
+                            <li><i class="fas fa-check"></i> Soporte por email</li>
+                            <li><i class="fas fa-check"></i> Actualizaciones automáticas</li>
+                            <li><i class="fas fa-check"></i> Hasta 5 usuarios</li>
+                        </ul>
+                        <button class="btn-get-started">Comenzar</button>
+                    </div>
+
+                    <div class="pricing-card featured">
+                        <div class="most-popular-badge">Más Popular</div>
+                        <h3 class="plan-name">Professional</h3>
+                        <p class="plan-subtitle">Para empresas en crecimiento que necesitan más.</p>
+                        <div class="price-box">
+                            <span class="currency">$</span>
+                            <span class="amount" data-monthly="149">149</span>
+                            <span class="period">/mes</span>
+                        </div>
+                        <ul class="features-list">
+                            <li><i class="fas fa-check"></i> Hasta 3 productos</li>
+                            <li><i class="fas fa-check"></i> Soporte prioritario 24/7</li>
+                            <li><i class="fas fa-check"></i> Hasta 25 usuarios</li>
+                            <li><i class="fas fa-check"></i> API acceso</li>
+                            <li><i class="fas fa-check"></i> Reportes avanzados</li>
+                        </ul>
+                        <button class="btn-get-started primary">Comenzar</button>
+                    </div>
+
+                    <div class="pricing-card">
+                        <h3 class="plan-name">Enterprise</h3>
+                        <p class="plan-subtitle">Solución completa para grandes organizaciones.</p>
+                        <div class="price-box">
+                            <span class="currency">$</span>
+                            <span class="amount" data-monthly="399">399</span>
+                            <span class="period">/mes</span>
+                        </div>
+                        <ul class="features-list">
+                            <li><i class="fas fa-check"></i> Productos ilimitados</li>
+                            <li><i class="fas fa-check"></i> Soporte dedicado</li>
+                            <li><i class="fas fa-check"></i> SLA garantizado</li>
+                            <li><i class="fas fa-check"></i> Usuarios ilimitados</li>
+                            <li><i class="fas fa-check"></i> API acceso completo</li>
+                        </ul>
+                        <button class="btn-get-started">Comenzar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/navbar.js"></script> <script src="../js/auth.js"></script> 
+    <script src="../js/main.js"></script>
+
+    <script>
+    // 1. FUNCIÓN PARA CARGAR NAVBAR Y FOOTER
+    async function cargarComponentes() {
+        try {
+            // Cargar Navbar
+            const resNavbar = await fetch('../components/navbar.html');
+            const dataNavbar = await resNavbar.text();
+            document.getElementById('navbar').innerHTML = dataNavbar;
+
+            // ✅ ACTUALIZAR ESTADO DE LOGIN (Muestra el email si está logueado)
+            if (typeof window.actualizarNavbar === 'function') {
+                window.actualizarNavbar();
+            }
+
+            // Inicializar la hamburguesa (navbar.js)
+            if (typeof window.initHeader === 'function') {
+                window.initHeader();
+            }
+
+            // Cargar Footer
+            const resFooter = await fetch('../components/footer.html');
+            const dataFooter = await resFooter.text();
+            document.getElementById('footer').innerHTML = dataFooter;
+
+        } catch (error) {
+            console.error("Error cargando componentes en Precios:", error);
+        }
+    }
+
+    // 2. LÓGICA DE PRECIOS Y INICIALIZACIÓN
+    document.addEventListener("DOMContentLoaded", function () {
+        // Ejecutamos la carga de componentes inmediatamente
+        cargarComponentes();
+
+        const monthlyBtn = document.getElementById("monthlyBtn");
+        const annualBtn = document.getElementById("annualBtn");
+        const prices = document.querySelectorAll(".amount");
+        const periods = document.querySelectorAll(".period");
+
+        // Función para animar el cambio de precio suavemente
+        function animatePrice(element, end, duration = 300) {
+            const start = parseInt(element.textContent) || 0;
+            let startTime = null;
+
+            function animation(currentTime) {
+                if (!startTime) startTime = currentTime;
+                const progress = currentTime - startTime;
+                const percentage = Math.min(progress / duration, 1);
+                const value = Math.floor(start + (end - start) * percentage);
+                element.textContent = value;
+                if (percentage < 1) requestAnimationFrame(animation);
+            }
+            requestAnimationFrame(animation);
+        }
+
+        // Evento Mensual
+        monthlyBtn.addEventListener("click", () => {
+            monthlyBtn.classList.add("active");
+            annualBtn.classList.remove("active");
+            prices.forEach(price => {
+                const monthlyPrice = Number(price.dataset.monthly);
+                animatePrice(price, monthlyPrice);
+            });
+            periods.forEach(period => { period.textContent = "/mes"; });
+        });
+
+        // Evento Anual
+        annualBtn.addEventListener("click", () => {
+            annualBtn.classList.add("active");
+            monthlyBtn.classList.remove("active");
+            prices.forEach(price => {
+                const monthlyPrice = Number(price.dataset.monthly);
+                const discounted = Math.floor(monthlyPrice * 0.83); // Aplica el 17% de descuento
+                animatePrice(price, discounted);
+            });
+            periods.forEach(period => { period.textContent = "/mes (facturado anual)"; });
+        });
+    });
+</script>
+    
+</body>
+</html>

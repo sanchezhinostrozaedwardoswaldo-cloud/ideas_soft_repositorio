@@ -1,0 +1,164 @@
+
+
+/* --- FOOTER PRINCIPAL --- */
+.footer-main {
+    background-color: #070b14; /* Casi negro */
+    color: #94a3b8;
+    padding: 80px 8% 30px;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.2fr; /* Proporciones según imagen */
+    gap: 40px;
+}
+
+/* Columna de Logo e Info */
+.footer-col.info .logo-f {
+    color: white;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.footer-col.info .logo-f span {
+    background: #007bff;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.footer-col.info p {
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* Listas de Navegación y Productos */
+.footer-col h4 {
+    color: white;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 12px;
+}
+
+.footer-col ul li a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-col ul li a:hover {
+    color: #007bff;
+    padding-left: 5px; /* Pequeño efecto de desplazamiento */
+}
+
+/* Columna de Contacto (Ajustada) */
+.footer-col .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Espacio entre icono y texto */
+    margin-bottom: 20px; /* Más espacio entre líneas de contacto */
+    color: #94a3b8;
+}
+
+.footer-col .contact-item i {
+    color: #ffffff;
+    font-size: 1rem;
+    width: 20px;
+    text-align: center;
+}
+
+/* Redes Sociales con Hover */
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.social-links a {
+    color: #94a3b8;
+    background: #1e293b;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #ffffff;
+    background: #007bff; /* Color azul al pasar el mouse */
+    transform: translateY(-5px); /* Salto dinámico */
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+}
+
+/* Copyright */
+.footer-bottom {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 25px;
+    border-top: 1px solid #1e293b;
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+/* RESPONSIVO */
+@media (max-width: 992px) {
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .footer-col .contact-item {
+        justify-content: center;
+    }
+    .social-links {
+        justify-content: center;
+    }
+    .cta-btns {
+        flex-direction: column;
+    }
+}
+@media (max-width: 480px) {
+    .footer-container {
+        grid-template-columns: 1fr; /* Todo en una columna */
+        text-align: center;
+    }
+
+    .footer-col.info, .footer-col {
+        align-items: center;
+    }
+
+    .contact-item {
+        justify-content: center; /* Centrar iconos de contacto */
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .cta-btns {
+        flex-direction: column;
+        width: 100%;
+    }
+}

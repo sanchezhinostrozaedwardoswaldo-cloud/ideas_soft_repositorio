@@ -1,0 +1,199 @@
+/* ================================================================
+   1. VARIABLES Y BASE
+   ================================================================ */
+:root {
+  --header-height: 70px;
+  --header-bg: #0b1120;
+  --header-border: rgba(255, 255, 255, 0.1);
+  --blue: #007bff;
+  --white: #ffffff;
+  --btn-bg: rgba(255, 255, 255, 0.08); 
+  --btn-hover: rgba(255, 255, 255, 0.15);
+  --nav-link: #a0aec0;
+}
+
+/* Forzar el fondo oscuro para evitar destellos blancos de Bootstrap */
+header.main-header, 
+.main-header .navbar-container {
+  background-color: var(--header-bg) !important;
+}
+
+.main-header {
+  position: fixed;
+  width: 100%;
+  top: 0; left: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--header-border);
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+}
+
+/* ESTRUCTURA GRID: Logo | Menú | Acciones */
+.navbar-container {
+  display: grid;
+  grid-template-columns: 220px 1fr 220px;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ================================================================
+   2. ELEMENTOS ESTÁTICOS (LOGO Y MENÚ)
+   ================================================================ */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  justify-self: start;
+}
+
+.logo-icon {
+  background-color: var(--blue);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.logo-text { color: white; font-weight: 700; font-size: 1.25rem; }
+
+.nav-menu {
+  display: flex; /* Visible en PC */
+  list-style: none;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: var(--nav-link);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-menu a:hover, .nav-menu a.active { color: var(--blue); }
+
+/* ================================================================
+   3. BOTONES DE ACCIÓN (LOS "CUADRITOS")
+   ================================================================ */
+.nav-auth {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-self: end;
+}
+
+/* UNIFICACIÓN: Estilo para botón de login, botón de usuario JS y hamburguesa */
+.btn-login, 
+.nav-icon-btn,
+.hamburger-btn {
+  background-color: var(--btn-bg) !important;
+  border: 1px solid var(--header-border) !important;
+  color: white !important;
+  border-radius: 8px !important;
+  height: 40px;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: none !important;
+}
+
+/* --- SOLUCIÓN AL PROBLEMA: Hamburguesa OCULTA en PC --- */
+.hamburger-btn {
+  display: none !important; /* Desaparece en PC/Laptop */
+  width: 40px;
+  padding: 0 !important;
+}
+
+.btn-login, .nav-icon-btn {
+  padding: 0 15px !important;
+}
+
+.btn-login:hover, .nav-icon-btn:hover, .hamburger-btn:hover {
+  background-color: var(--btn-hover) !important;
+}
+
+/* Email Truncado (Para que no empuje el diseño) */
+.user-email-text, .btn-text {
+  font-size: 0.85rem;
+  max-width: 130px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: 8px;
+}
+
+/* Carrito */
+.cart-container {
+  color: white;
+  position: relative;
+  font-size: 1.2rem;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.cart-badge {
+  background: var(--blue);
+  font-size: 0.65rem;
+  position: absolute;
+  top: -8px; right: -10px;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Dropdown del Usuario (Fondo oscuro) */
+.dropdown-menu {
+  background-color: #161d31 !important;
+  border: 1px solid var(--header-border) !important;
+}
+
+.dropdown-item { color: var(--nav-link) !important; }
+.dropdown-item:hover { background-color: rgba(255,255,255,0.05) !important; color: white !important; }
+
+/* ================================================================
+   4. RESPONSIVE (MÓVIL Y TABLET)
+   ================================================================ */
+@media (max-width: 991px) {
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Ocultamos menú horizontal */
+  .nav-menu {
+    display: none; 
+    flex-direction: column;
+    position: absolute;
+    top: var(--header-height);
+    left: 0; width: 100%;
+    background: #0f172a;
+    padding: 20px;
+    border-bottom: 1px solid var(--header-border);
+  }
+
+  /* --- ACTIVAMOS Hamburguesa en móvil --- */
+  .hamburger-btn {
+    display: flex !important;
+  }
+
+  .nav-menu.active { display: flex; }
+
+  /* En móvil el botón de usuario se vuelve solo icono cuadrado */
+  .btn-text, .user-email-text { display: none; }
+  .btn-login, .nav-icon-btn { width: 40px; padding: 0 !important; }
+}
+
+/* REGLAS DE TEXTO PERSONALIZADAS */
+.tagline { color: var(--white) !important; } /* tecnología que impulsa tu crecimiento */
+.services-highlight { color: #000000 !important; font-weight: bold; } /* servicio tecnologicos */

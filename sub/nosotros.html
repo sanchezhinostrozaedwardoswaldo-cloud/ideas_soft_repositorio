@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IdeasSoft - Precios</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/nosotros.css">
+</head>
+<body>
+    
+    <div id="navbar"></div>
+
+    <main>
+    <!-- HERO -->
+    <section class="about-hero">
+        <div class="container">
+            <p class="breadcrumb">Inicio / <span>Nosotros</span></p>
+            <p class="section-label">SOBRE NOSOTROS</p>
+
+            <h1>
+                Construimos el <span class="highlight">futuro digital</span>
+            </h1>
+
+            <p class="hero-text">
+                Ideas Soft nació con la visión de democratizar la tecnología empresarial,
+                creando software accesible, potente y fácil de usar.
+            </p>
+        </div>
+    </section>
+
+    <!-- CONTENT -->
+    <section class="about-content">
+        <div class="container cards">
+
+            <div class="about-card">
+                <div class="icon-box">
+                    <i class="fa-solid fa-bullseye"></i>
+                </div>
+                <h3>Misión</h3>
+                <p>
+                    Empoderar a empresas de todos los tamaños con soluciones tecnológicas innovadoras
+                    que simplifiquen sus operaciones y maximicen su potencial de crecimiento.
+                </p>
+            </div>
+
+            <div class="about-card">
+                <div class="icon-box">
+                    <i class="fa-solid fa-eye"></i>
+                </div>
+                <h3>Visión</h3>
+                <p>
+                    Ser la empresa líder en soluciones de software empresarial en Latinoamérica y España,
+                    reconocida por la calidad, innovación y compromiso con nuestros clientes.
+                </p>
+            </div>
+
+            <div class="about-card">
+                <div class="icon-box">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <h3>Valores</h3>
+                <p>
+                    Innovación constante, calidad sin compromisos, orientación al cliente,
+                    trabajo en equipo y responsabilidad social corporativa.
+                </p>
+            </div>
+
+        </div>
+        <section class="team-section">
+    <div class="container">
+
+        <h2 class="team-title">Nuestro Equipo</h2>
+        <p class="team-subtitle">
+            Profesionales apasionados por la tecnología.
+        </p>
+
+        <div class="team-grid">
+
+            <div class="team-card">
+                <div class="avatar">CM</div>
+                <h4>Carlos Mendoza</h4>
+                <p>CEO & Fundador</p>
+            </div>
+
+            <div class="team-card">
+                <div class="avatar">LG</div>
+                <h4>Laura García</h4>
+                <p>CTO</p>
+            </div>
+
+            <div class="team-card">
+                <div class="avatar">MT</div>
+                <h4>Miguel Torres</h4>
+                <p>Director de Producto</p>
+            </div>
+
+            <div class="team-card">
+                <div class="avatar">AR</div>
+                <h4>Ana Ruiz</h4>
+                <p>Directora Comercial</p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+    </section>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="../js/navbar.js"></script> 
+    <script src="../js/auth.js"></script> 
+
+    <script src="../js/main.js"></script>
+<script>
+  async function cargarComponentes() {
+    try {
+        // 1. Cargar Navbar
+        const resNavbar = await fetch('../components/navbar.html');
+        const dataNavbar = await resNavbar.text();
+        document.getElementById('navbar').innerHTML = dataNavbar;
+
+        // --- ESTO ES LO QUE HACE QUE APAREZCA EL USUARIO ---
+        // Una vez que el HTML del navbar ya está en la página,
+        // llamamos a la función que ya tienes en tu auth.js
+        if (typeof window.actualizarNavbar === 'function') {
+            window.actualizarNavbar();
+        }
+        // ---------------------------------------------------
+
+        // ACTIVAR HAMBURGUESA
+        if (typeof window.initHeader === 'function') {
+            window.initHeader();
+        }
+
+        // 2. Cargar Footer
+        const resFooter = await fetch('../components/footer.html');
+        const dataFooter = await resFooter.text();
+        document.getElementById('footer').innerHTML = dataFooter;
+
+        if (typeof cargarProductosFooter === 'function') {
+            cargarProductosFooter();
+        }
+
+    } catch (error) {
+        console.error("Error cargando componentes en Nosotros:", error);
+    }
+}
+</script>
+</body>
+</html>
+
+</body>
+</html>
