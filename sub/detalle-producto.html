@@ -137,9 +137,10 @@
 
 <div id="footer"></div>
 
+<script src="../js/main.js"></script>
 <script src="../js/carrito.js"></script>
 <script src="../js/auth.js"></script> <script src="../js/navbar.js"></script> <script src="../js/detalles.js"></script>
-<script src="../js/main.js"></script>
+
 <!-- Helper para obtener id de la URL (puedes moverlo a un archivo js si prefieres) -->
 <script>
 async function cargarComponentes() {
@@ -148,11 +149,16 @@ async function cargarComponentes() {
         const [navHtml, footHtml] = await Promise.all([
             fetch('../components/navbar.html').then(r => r.text()),
             fetch('../components/footer.html').then(r => r.text())
+            
         ]);
 
         // 2. Inyectar en el DOM
         document.getElementById('navbar').innerHTML = navHtml;
         document.getElementById('footer').innerHTML = footHtml;
+        // CARGAR PRODUCTOS DEL FOOTER
+        if (typeof cargarProductosFooter === "function") {
+            cargarProductosFooter();
+        }
 
         // 3. Activar el estado de Login (auth.js)
         if (window.actualizarNavbar) {

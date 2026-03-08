@@ -94,10 +94,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
 
                 if (response.ok && !result.error && result.access_token) {
-                    localStorage.setItem('token', result.access_token);
+                    const token = result.access_token;
+
+                    localStorage.setItem('token', token);
                     localStorage.setItem('user_email', email);
+
+                    // DECODIFICAR TOKEN
+                    const payload = JSON.parse(atob(token.split('.')[1]));
+                    const rol = payload.rol;
+
+                    localStorage.setItem('user_role', rol);
+
                     alert("✅ Bienvenido");
-                    window.location.href = "../index.html"; 
+
+                    if (rol === "admin") {
+                        window.location.href = "../admin/dashboard.html";
+                    } else {
+                        window.location.href = "../index.html";
+                    }
                 } else {
                     const mensaje = result.detail || result.error || "Credenciales incorrectas.";
                     alert("❌ " + mensaje);

@@ -53,7 +53,7 @@ header.main-header,
 }
 
 .logo-img {
-  height: 60px !important; /* Tamaño corregido para que se vea grande y nítido */
+  height: 50px !important; /* Tamaño corregido para que se vea grande y nítido */
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0 0 5px rgba(0, 123, 255, 0.2));

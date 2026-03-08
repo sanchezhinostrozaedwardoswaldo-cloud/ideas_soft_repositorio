@@ -25,7 +25,7 @@
 }
 
 .footer-col.info .logo-f span {
-    background: #007bff;
+
     padding: 5px 10px;
     border-radius: 6px;
     font-family: 'Courier New', Courier, monospace;
@@ -35,6 +35,8 @@
     line-height: 1.6;
     margin-bottom: 25px;
 }
+
+
 
 /* Listas de Navegación y Productos */
 .footer-col h4 {

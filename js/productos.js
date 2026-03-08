@@ -189,5 +189,4 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    cargarProductos();
 });

@@ -153,6 +153,9 @@
             const resFooter = await fetch('../components/footer.html');
             const dataFooter = await resFooter.text();
             document.getElementById('footer').innerHTML = dataFooter;
+            if (typeof cargarProductosFooter === "function") {
+                cargarProductosFooter();
+            }
 
             // Opcional: Autocompletar el email en el formulario si está logueado
             const savedEmail = localStorage.getItem('user_email');

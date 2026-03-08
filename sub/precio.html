@@ -126,6 +126,9 @@
             const resFooter = await fetch('../components/footer.html');
             const dataFooter = await resFooter.text();
             document.getElementById('footer').innerHTML = dataFooter;
+            if (typeof cargarProductosFooter === "function") {
+                cargarProductosFooter();
+            }
 
         } catch (error) {
             console.error("Error cargando componentes en Precios:", error);
